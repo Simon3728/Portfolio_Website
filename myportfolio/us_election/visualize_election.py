@@ -3,7 +3,6 @@ import geopandas as gpd
 import pandas as pd
 import io
 from .models import ElectionResult
-from django.db.models import Sum
 
 # Set Matplotlib backend to Agg
 plt.switch_backend('Agg')
