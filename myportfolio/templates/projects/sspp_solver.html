@@ -1,0 +1,136 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}SSPP Solver - Personal Portfolio{% endblock %}
+
+{% block content %}
+<section class="py-5">
+    <div class="container">
+        <h1 class="display-5 fw-bolder text-center mb-5">Single Shortest Path Problem Solver</h1>
+        <p class="mt-5">
+            The goal of this project was to practically apply search algorithms and understand their concepts. 
+            I programmed two Single Shortest Path Problem solvers: Dijkstra and A* algorithms. For the graph, 
+            I chose a map of the US, representing cities as nodes. This is appropriate since these algorithms, 
+            especially A*, are often used in navigation problems, like finding the shortest path from one place to another.
+        </p>
+        
+        <h2 class="mt-4">Graph Creation</h2>
+        <p>
+            The data source for city information is <a href="https://simplemaps.com/data/us-cities" target="_blank" class="text-reset">Simple Maps</a>. 
+            This data includes population and coordinates, which are necessary for calculating the distances between cities. 
+            The coordinates allow us to use the Haversine distance formula, which determines the shortest distance between two points 
+            on the Earth's surface, taking into account the Earth's curvature. The Haversine distance is used for both of the solvers.
+        </p>
+        <p>
+            From the city data, a Minimum Spanning Tree (MST) is created, which ensures that there is a path connecting all nodes. 
+            To add complexity to the graph, additional connections are made. You can select a desired degree (the number of connections a node has), 
+            and new connections to the nearest unconnected nodes will be created until the desired degree is achieved. 
+            This approach allows for comparing the solvers under different graph complexities. The graph is represented through an adjacency list for efficient navigation.
+        </p>
+        
+        
+        <h2 class="mt-4">Dijkstra's Algorithm</h2>
+        <p>
+            Dijkstra's algorithm is a method for finding the shortest path between nodes in a graph. 
+            With the cities of the US and my made-up connections between them (representing roads), this means finding the shortest 
+            path from one city to another.
+        </p>
+        <p>
+            The algorithm starts at the beginning city and looks at all the cities directly connected to it, 
+            calculating the distance to each one. Then, it picks the city with the shortest distance and explores the routes from there, 
+            always choosing the next closest city. This process continues until it reaches the destination city, 
+            ensuring the shortest path is found. Dijkstra's algorithm guarantees the shortest route but can be somewhat brute-force, 
+            checking many possible paths to ensure accuracy.
+        </p>
+        
+        <p>
+            Below is an example of Dijkstra's algorithm applied to a graph of US cities with populations over 500,000 and a desired degree of 7:
+        </p>
+        <img src="{% static 'assets/SSSP/dijkstra_miami_seattle.png' %}" class="img-fluid mb-4" alt="Dijkstra's Algorithm Example">
+        <p>
+            In this image, the shortest path from Miami to Seattle is highlighted in red, with the yellow circles representing 
+            checked nodes.
+        </p>
+
+        <h2 class="mt-4">A* Algorithm</h2>
+        <p>
+            The A* algorithm builds on Dijkstra's algorithm by adding a heuristic to guide the search more efficiently. 
+            Like Dijkstra's, A* starts at the beginning city and examines all directly connected cities. 
+            However, A* uses a heuristic to estimate the best next step for the shortest path. In my example, the heuristic is the distance 
+            from the currently checked city to the destination city. When the heuristic is well-chosen, A* always finds the optimal path.
+        </p>
+        <p>
+            This heuristic helps A* prioritize cities that are likely to lead to the shortest path, making the search faster and more efficient. 
+            By combining the actual distance traveled with the estimated distance to the goal, A* often finds the 
+            optimal path more quickly than Dijkstra's algorithm.
+        </p>
+
+        <p>Below is an example of the A* algorithm applied to the same graph:</p>
+        <img src="{% static 'assets/SSSP/astar_miami_seattle.png' %}" class="img-fluid mb-4" alt="A* Algorithm Example">
+        <p>
+            The A* algorithm checks fewer nodes than Dijkstra, as seen in the image. This efficiency makes A* better for this case, especially for larger, denser graphs.
+        </p>
+
+        <h2 class="mt-4">Performance Comparison</h2>
+        <p>
+            Here are plots comparing the number of nodes checked by Dijkstra and A* for graphs with varying connectivity. 
+            I chose all cities in the US with a population over 500,000 (85 cities) and varied the desired degree to create 
+            three different graphs. In each graph, I selected 200 random city pairs and compared the number of nodes checked 
+            by Dijkstra and A* to find the shortest path.
+        </p>
+        <img src="{% static 'assets/SSSP/efficiency_85_144.png' %}" class="img-fluid mb-4" alt="Checked Nodes Dijkstra vs A* (144 Edges)">
+        <img src="{% static 'assets/SSSP/efficiency_85_332.png' %}" class="img-fluid mb-4" alt="Checked Nodes Dijkstra vs A* (332 Edges)">
+        <img src="{% static 'assets/SSSP/efficiency_85_934.png' %}" class="img-fluid mb-4" alt="Checked Nodes Dijkstra vs A* (934 Edges)">
+        <p>
+            These plots show that A* significantly outperforms Dijkstra, especially in denser graphs. The heuristic in A* reduces the search space, 
+            making it more efficient.
+        </p>
+
+        <h2 class="mt-4">Weighted A* Algorithm</h2>
+        <p>
+            The weighted A* algorithm adjusts the influence of the heuristic by multiplying it with a weight factor. 
+            This can speed up the search but may reduce accuracy. Below is an example using the same graph as Dijkstra and A*, 
+            with a heuristic weight of 2:
+        </p>
+        <img src="{% static 'assets/SSSP/weighted_astar_miami_seattle.png' %}" class="img-fluid mb-4" alt="Weighted A* Algorithm Example">
+        <p>
+            This image shows that the weighted A* algorithm checks significantly fewer nodes but may not find the optimal path, as seen when compared to Dijkstra and A*. 
+            This approach is useful when an optimal solution is not required and efficiency is much more important.
+        </p>
+        <h3 class="mt-3">Performance of Weighted A* Algorithm</h3>
+        <p>
+            The following graph represents the performance of the weighted A* algorithm with different weight factors (epsilon values) compared to Dijkstra's algorithm. 
+            The blue lines show the percentage of nodes checked by the weighted A* algorithm relative to Dijkstra's algorithm. For example, 40% means that the 
+            weighted A* algorithm checked only 40% of the nodes that Dijkstra's algorithm checked. The red lines indicate the percentage error, 
+            which measures how much longer the path found by the weighted A* algorithm is compared to the optimal path found by Dijkstra's algorithm. 
+            An epsilon of 1 represents the standard A* algorithm.
+        </p>
+        <img src="{% static 'assets/SSSP/weighted_astar_85.png' %}" class="img-fluid mb-4" alt="Weighted A* Performance">
+        <p>
+            For graphs with varying degrees of connectivity (144, 332, and 934 edges), an epsilon of 1.2 provides a good balance between efficiency and accuracy. 
+            As epsilon increases, the number of checked nodes decreases, but the path error rises. in conclusion, when choosing the wheighted A*, it is important to 
+            know how big roughly the error is and how much the efficiency is increased, to know if approach is good            
+        </p>
+
+        <h2 class="mt-5">Conclusion</h2>
+        <p>
+            In this project, I implemented and tested the Dijkstra algorithm, A*, and weighted A* on a graph of US cities. 
+            Through the practical implementation, I was able to expand my understanding of graphs and various algorithms 
+            for solving shortest path problems, beyond the theory I learned in college. It also improves my ability to work 
+            with real-world data, map city coordinates, and visualize results.
+        </p>
+        <p>
+            One area that could be imporved is the graph creation process, which can be time-consuming due to the inefficient implementation 
+            of the Minimum Spanning Tree (MST) and the addition of connections. I chose this method to ensure a fully connected graph and to practice 
+            implementing the MST. The current MST implementation is inefficient because it assumes an edge between every pair of nodes, leading 
+            to a complexity of O(V<sup>2</sup> log V), where V is the number of nodes. Additionally, the method for adding extra connections is 
+            not optimal, with a time complexity of O(V<sup>2</sup>). However, for this project, it was more important to always create a 
+            connected and realistic graph (where connections are not too long, as they represent roads) than to make it highly efficient.
+        </p>
+        <p>
+            A more efficient approach could involve sorting cities by their longitude and latitude values and then connecting 
+            nearby cities in this sorted list. However, this method might not guarantee full connectivity of the graph. 
+        </p>
+    </div>
+</section>
+{% endblock %}

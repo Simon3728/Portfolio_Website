@@ -1,0 +1,205 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}US Election Data Analysis - Personal Portfolio{% endblock %}
+
+{% block content %}
+<section class="py-5">
+    <div class="container-md">
+        <h1 class="display-5 fw-bolder text-center mb-5">US Election Data Analysis</h1>
+        <p class="mt-5">
+            In this project, I collected, analyzed, and visualized a lot of data from US elections. 
+            My main goal was to see if I could find a relationship between various aspects like demographics, 
+            economic and social indicators, and the number of people voting for Republicans.
+        </p>
+        
+        <h2 class="mt-3">Project Overview</h2>
+        <p>
+            The first step was to find reliable data that met two criteria: 
+            it should cover all states and span the years between 2000 and 2019.  
+            This task wasn't easy, especially when it came to converting various formats 
+            (Excel files, CSV, PDFs) into a unified pandas DataFrame so that I could 
+            combine the data later on. 
+        </p>
+        <p>
+            In the end, I managed to gather good data on unemployment, GDP, population 
+            stats, education, urbanization, and election results from all states.
+            Next, I needed to verify the data's accuracy to ensure good results. 
+            I primarily checked whether there was data for all the years and states 
+            I wanted and whether the data was in the correct format.
+        </p>
+        <p>
+            For practice, I plotted some data in different formats, which you 
+            will see throughout this page.
+        </p>
+        <p>
+            The final step was data analysis, where I tried different methods like KNN, 
+            Linear Regression, and Polynomial Regression. This project was mainly the result 
+            of the Harvard CS109a class I watched online, where I learned more about modeling, 
+            statistics, and basic machine learning models. I also learned how to use different 
+            libraries like pandas, NumPy, matplotlib, and scikit-learn, and I wanted to practice 
+            this new knowledge with this project. 
+        </p>
+        <p>
+            You can check out the course here: <a href="https://www.edx.org/learn/data-science/harvard-university-introduction-to-data-science-with-python" class="text-reset">Harvard CS109a</a>        
+        </p>
+        
+        <h2>Data Importing and Data Verification</h2>
+        <p>
+            I collected the data from different sources (for example, the US Census), 
+            read the data from the files, and saved them in a PostgreSQL database. 
+            Before saving the data in the database, I preprocessed it to handle missing 
+            values and inconsistencies. It is important to note that I did not verify 
+            the correctness of the data, but I tried to use sources that appeared trustworthy.
+        </p>
+        <p>
+            To ensure accuracy, I performed several checks: 
+            <ul>
+                <li>Consistency checks to verify that data values make sense ()</li>
+                <li>Coverage checks to ensure there is no missing data for states and years</li>
+                <li>Checking data types and formats</li>
+            </ul>
+        </p>
+
+        <h2 class="mt-4">Data Visualization</h2>
+        <p>Here are some different matplotlib that i make to visualize the Data:</p>
+        <h4 class="mt-5">Unemployment Rates</h4>
+        <p>
+            This plot shows the unemployment rate of US states between 1976 and 2024. 
+        </p>
+        <img src="{% static 'assets/us_election/unemployment_animation.gif' %}" class="responsive-img mb-5" alt="Unemployment Rates">
+        
+        <h4>Population Statistics</h4>
+        <p>
+            This plot shows the GDP per person from 2000 to 2019. 
+            The states are ordered with the highest GDP per person at the top for each year.
+        </p>
+        <img src="{% static 'assets/us_election/gdp_per_person_by_state.gif' %}" class="responsive-img" alt="Population Statistics">
+
+        <h4 class="mt-5">Age and Sex</h4>
+        <p>
+            You can plot the population distribution for different states by year.
+        </p>
+        <form method="post" id="PopulationForm" class="row g-3">
+            {% csrf_token %}
+            <input type="hidden" name="form_type" value="population_form">
+            <div class="col-auto">
+                {{ form.state }}
+            </div>
+            <div class="col-auto">
+                {{ form.year }}
+            </div>
+            <div class="col-auto">
+                <button type="submit" id="updateButton" class="btn btn-success mb-3">Show Plots</button>
+            </div>
+        </form>
+
+        <div id="updateSection" class="row mt-3">
+            {% if bar_chart_url and pie_chart_url %}
+                <div class="col-md-6">
+                    <img src="{{ bar_chart_url }}" alt="Population Chart" class="img-fluid">
+                </div>
+                <div class="col-md-6">
+                    <img src="{{ pie_chart_url }}" alt="Population Pie Chart" class="img-fluid">
+                </div>
+            {% endif %}
+        </div>
+
+        
+        <h4 class="mt-5">Election Results</h4>
+        <p>
+            You can plot the presidential election results from 2000 to 2020 on a map. 
+            The percentage on the map represents the votes for the winning party in this state.
+        </p>
+        <form method="post" id="ElectionYearForm" class="row g-3">
+            {% csrf_token %}
+            <input type="hidden" name="form_type" value="election_year_form">
+            <div class="col-auto">
+                {{ year_form.year }}
+            </div>
+            <div class="col-auto">
+                <button type="submit" id="updateYearButton" class="btn btn-success mb-3">Update</button>
+            </div>
+        </form>
+        <div id="electionResultSection" class="row mt-3">
+            {% if election_map_url %}
+                <img src="{{ election_map_url }}" alt="Election Map" class="img-fluid">
+            {% endif %}
+        </div>
+
+        <h2 class="mt-5">Analysis and Results</h2>
+        <p>
+            The main goal was to determine if there is a relationship between the economic and social 
+            data of each state and its presidential election results. In total, I had around 300 datasets 
+            because I looked at six election results from 2000 until 2020 and the corresponding 
+            data from those years for around 50 states. Here's what I found:
+        </p>
+
+        <h3 class="mt-5">K-Nearest Neighbors (KNN)</h3>
+        <p>
+            For the implementation of the K-Nearest Neighbors (KNN) algorithm, I used a greedy feature 
+            selection method combined with a grid search for hyperparameter tuning. This approach iteratively 
+            selects features that improve the model's R-squared score, ensuring only the most impactful features 
+            are included in the final model. Cross-validation with a grid search was performed to determine 
+            the optimal number of neighbors (k) that maximizes the model's performance. With this approach, 
+            I tried to get the best result possible with the given data.
+        </p>
+        <img src="{% static 'assets/us_election/KNN.png' %}" class="img-fluid mb-4" alt="KNN Results">
+        <p>
+            The plot shows that my algorithm selected only urban population and GDP per capita as features since 
+            additional features only made the prediction worse. I only plotted the urban population, but this 
+            model is also trained on the GDP per capita. The best-found value for <i>k</i> was 7, meaning the algorithm 
+            always looks at its seven closest neighbors to make predictions.
+        </p>
+        <p>
+            The resulting R&sup2 value of 0.5 suggests that there might be a moderate relationship between the two
+            features and the predictor. The plot shows that the higher the urbanization percentage in a state, 
+            the less likely the state is to vote for the Republicans.
+        </p>
+
+        <h3 class="mt-5">Linear Regression</h3>
+        <p>
+            The approach for linear regression was similar, using greedy feature selection and cross-validation.
+        </p>
+        <img src="{% static 'assets/us_election/Linear_Reg.png' %}" class="img-fluid mb-4" alt="Linear Regression Results">
+        <p>
+            The selected features were the rate of college finishers and the percentage of urban population. 
+            In the plotted data, it can be seen that there is a slight relationship between the college 
+            finisher rate and the Republican votes. However, due to too much variance in the data and possibly 
+            underfitting, the R&sup2 value for the test data is quite low at 0.28.
+        </p>
+
+        <h3 class="mt-5">Polynomial Regression</h3>
+        <p>
+            For polynomial regression, I also used greedy feature selection combined with a grid search to find the best polynomial degree. 
+            This method optimizes both the selection of features and the polynomial degree for the regression model.
+        </p>
+        <img src="{% static 'assets/us_election/Polynomial_Reg.png' %}" class="img-fluid mb-4" alt="Polynomial Regression Results">
+        <p>
+            This plot only shows an example plot of the best feature selected. But because of the big variance the R&sup2 value is again too
+            low to show any relationship to the Republican vote percentage.
+        </p>
+
+        <h2 class="mt-5">Conclusion</h2>
+        <p>
+            The analysis showed that there's too much variation in the data to proof a clear relation between socio-economic factors and election outcomes. 
+            <br>
+            The primary issue was the selection of data, as I only considered statewide data rather than individual-level data. This approach 
+            predicted which state characteristics might correlate with presidential election outcomes, but not which individual factors lead 
+            to certain political attitudes. This is problematic because there is typically only a small difference between Republican and 
+            Democratic votes (often just 1 or 2%), making it hard to identify any clear relationships with socioeconomic factors.
+        </p>
+        <p>
+            For an in-depth study involving individual data, you can look at the study by the <a href="https://www.pewresearch.org/politics/2023/07/12/voting-patterns-in-the-2022-elections/" class="text-reset">Pew Research Center</a> 
+        </p>
+
+        <p>
+            While the results of the analysis were not that impactful, I gained valuable experience in collecting, visualizing, and analyzing data. 
+            I also improved my skills with Python libraries such as pandas, scikit-learn, and matplotlib, which will be beneficial for future projects.
+
+            I realized that I need to invest more time and effort into finding quality data and getting a deeper understanding of the topic 
+            before conducting any analysis.
+        </p>
+    </div>
+</section>
+{% endblock %}

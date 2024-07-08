@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Contact - Personal Portfolio{% endblock %}
+
+{% block content %}
+<section class="py-5">
+    <div class="container form-container">
+        <div class="contact-card rounded-4 p-4">
+            <h1 class="card-title text-center mb-4">Contact Me</h1>
+            {% if messages %}
+                <div class="alert alert-success" role="alert">
+                    {% for message in messages %}
+                        {{ message }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+            <form method="post" action="">
+                {% csrf_token %}
+                <div class="mb-3">
+                    {{ form.name.label_tag }}
+                    {{ form.name }}
+                    {% if form.name.errors %}
+                        <div class="text-danger">{{ form.name.errors }}</div>
+                    {% endif %}
+                </div>
+                <div class="mb-3">
+                    {{ form.email.label_tag }}
+                    {{ form.email }}
+                    {% if form.email.errors %}
+                        <div class="text-danger">{{ form.email.errors }}</div>
+                    {% endif %}
+                </div>
+                <div class="mb-3">
+                    {{ form.subject.label_tag }}
+                    {{ form.subject }}
+                    {% if form.subject.errors %}
+                        <div class="text-danger">{{ form.subject.errors }}</div>
+                    {% endif %}
+                </div>
+                <div class="mb-3">
+                    {{ form.message.label_tag }}
+                    {{ form.message }}
+                    {% if form.message.errors %}
+                        <div class="text-danger">{{ form.message.errors }}</div>
+                    {% endif %}
+                </div>
+                <button type="submit" class="btn btn-success w-100">Send</button>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}

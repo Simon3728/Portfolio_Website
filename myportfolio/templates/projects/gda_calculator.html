@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}GDA Calculator - Personal Portfolio{% endblock %}
+
+{% block content %}
+<section class="py-5">
+    <div class="container-md">
+        <h1 class="display-5 fw-bolder text-center mb-5">Average Score Calculator</h1>
+        <p>
+            In this project, I extracted and analyzed my university grades from a PDF to calculate 
+            my average score. The main goal was to practice code structuring, including type hints, 
+            good exception handling, and docstrings. Plus, I no longer need to calculate my score 
+            manually (instead, I just needed two days of coding), and now I can easily calculate 
+            the scores for my classmates.
+        </p>
+        <p>
+            Here's how the PDF looks:
+        </p>
+        <div class="scrollable-container border">
+            <img src="{% static 'assets/Grades.png' %}" class="full-size-image" alt="Grades">
+        </div>
+        <h2 class="mt-5">Method</h2>
+        <p> 
+            First, I extracted all the text from the PDF line by line and filtered out only the lines with the subjects. 
+            In general, the average grade is calculated by the formula: sum of (Grade * LP) / total amount of LP. 
+            The challenge here is that often you have more LP for one area than needed, so not all LP will count for the average score.
+        </p>
+        <p>
+            I used two classes for structuring the Data: one for the subjects and one for the areas. I assigned the subjects to their 
+            corresponding areas with all the necessary information like the grade and LP. The next step was to determine how many 
+            LP are needed in each area and how many LP the subjects in that area have combined.
+        </p>
+        <p>
+            If there are too few points, the output will indicate how many points are missing. If there are too many LP, the subjects 
+            will be ordered by their grades, and only the best subjects will be counted.
+        </p>
+        <p>
+            If there are too few points, the output will indicate how many points are missing. If there are too many LP, 
+            the subjects will be ordered by their grades, and only the necessary LP from the worst subjects will be counted.
+        </p>
+
+        <h2 class="mt-5">Result</h2>
+        <p>
+            The resulting average score will simply be printed in the consol. Additionally, I made a function to create an 
+            Excel sheet with all the information about the subjects, grades, and the resulting average. 
+            Here’s how it looks:
+        </p>
+        <div class="scrollable-container border">
+            <img src="{% static 'assets/Grades_Excel2.png' %}" class="full-size-image" alt="Grades">
+        </div>
+        <p class="mt-3">
+            Here is the same version with the GDA Grades and English translation of the Subjects:
+        </p>
+        <div class="scrollable-container border">
+            <img src="{% static 'assets/Grades_Excel_us.png' %}" class="full-size-image" alt="Grades">
+        </div>
+        <p class="mt-3">
+            My average score is 2.24, which corresponds to a GDA of approximately 2.76. I have also received my thesis grade, 
+            which is 2.3 (equivalent to a 2.7 in GDA Grades). This doesn't significantly change my overall average. 
+            While I know that my thesis grade isn't the highest, there were challenges with my supervisor, 
+            and I eventually realized that the topic wasn't something I was interested in the future.
+        </p>
+        <p class="mt-3">
+            From the Docstring, I also created an automatic documentation detailing all the functions. Unfortunately, 
+            I lost the code for this when my laptop broke down, and I hadn't pushed it to Git yet.
+            So, you’ll just have to trust me on this, I really did make that documentation. Maybe someday, I'll recreate it.
+        </p>  
+    </div>
+</section>
+{% endblock %}

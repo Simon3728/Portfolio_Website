@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Projects - Personal Portfolio{% endblock %}
+
+{% block content %}
+<!-- Projects Section-->
+<section class="py-5">
+    <div class="container px-5 mb-5">
+        <div class="text-center mb-5">
+            <h1 class="display-5 fw-bolder mb-0"><span class="text-gradient d-inline">Projects</span></h1>
+        </div>
+        <p class="text-center mb-4">The code for all projects can be find on my <a href="https://github.com/Simon3728" class="text-reset">Github profil</a>.</p>
+        <div class="row gx-5 justify-content-center">
+            <div class="col-lg-11 col-xl-9 col-xxl-8">
+                <!-- Project Card 1-->
+                <a href="{% url 'connect4' %}" class="card-link">
+                    <div class="card overflow-hidden shadow rounded-4 bg-secondary border-light mb-5">
+                        <div class="card-body p-0">
+                            <div class="d-flex align-items-center">
+                                <div class="p-5">
+                                    <h2 class="fw-normal mb-5">Connect 4 AI</h2>
+                                    <p>
+                                        In this project I implemented a AI for playing the Connect 4 game. I will explain you the MiniMax Algorithm 
+                                        that I used and you can play against this algorithm.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                <!-- Project Card 2-->
+                <a href="{% url 'us_election' %}" class="card-link">
+                    <div class="card overflow-hidden shadow rounded-4 bg-secondary border-light mb-5">
+                        <div class="card-body p-0">
+                            <div class="d-flex align-items-center">
+                                <div class="p-5">
+                                    <h2 class="fw-normal mb-5">US Election Data Analysis</h2>
+                                    <p>
+                                        In this project, I collected, analyzed, and visualized a lot of data from US elections. 
+                                        My main goal was to see if I could find a relationship between various aspects like demographics, 
+                                        economic and social indicators, and the number of people voting for Republicans.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                <!-- Project Card 3-->
+                <a href="{% url 'sspp_solver' %}" class="card-link">
+                    <div class="card overflow-hidden shadow rounded-4 bg-secondary border-light mb-5">
+                        <div class="card-body p-0">
+                            <div class="d-flex align-items-center">
+                                <div class="p-5">
+                                    <h2 class="fw-normal mb-5">Single Shortest Path Problem Solver</h2>
+                                    <p>
+                                        This project addresses the Single Shortest Path Problem using Dijkstra and A* algorithms. 
+                                        The graph, based on US city data, can be adjusted for the number of cities and their connectivity. 
+                                        This allows for thorough testing and comparison of the algorithms' performance under different conditions.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                <!-- Project Card 4-->
+                <a href="{% url 'gda_calculator' %}" class="card-link">
+                    <div class="card overflow-hidden shadow rounded-4 bg-secondary border-light mb-5">
+                        <div class="card-body p-0">
+                            <div class="d-flex align-items-center">
+                                <div class="p-5">
+                                    <h2 class="fw-normal mb-5">Average Score Calculator</h2>
+                                    <p>
+                                        In this project, I extracted and analyzed my university grades from a PDF to calculate 
+                                        my average score. The main goal was to practice code structuring, including type hints, 
+                                        good exception handling, and docstrings.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

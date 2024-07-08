@@ -1,0 +1,224 @@
+@charset "UTF-8";
+
+ html, body {
+  background-color: #1f1f1f !important;
+  color: #fff;
+  font-family: "Roboto", sans-serif;
+}
+
+.profil-card {
+  background-color: transparent !important;
+  border-radius: 30px;
+  overflow: hidden;
+}
+
+.profil-card-img {
+  height: auto; 
+  margin: 0 auto; 
+  display: block; 
+  padding-left: 10%; 
+  padding-right: 10%;
+}
+
+.fixed-box {
+  position: fixed;
+  top: 50%;
+  left: 5%;
+  transform: translateY(-50%);
+  height: 70%;
+  max-width: 25%;
+  background-color: #1f1f1f;
+  border: 0.3px solid #ffffff9c;
+  border-radius: 20px;
+  padding: 20px;
+  text-align: center;
+  overflow: hidden;
+}
+
+.fixed-box img {
+  height: auto; 
+  border-radius: 20px;
+  margin-bottom: 20px;
+  object-fit: contain;
+}
+
+.social-icons a {
+  color: #fff;
+  margin: 0 10px;
+  text-decoration: none;
+}
+
+@media (max-width: 992px) {
+  .fixed-box {
+    height: 100%;
+  }
+
+  .about-me p {
+    max-width: 100% !important;
+  }
+
+  .form-container .contact-card {
+    width: 100%; 
+  }
+
+  .form-container {
+    height: auto; 
+    padding-top: 0; 
+  }
+
+  .responsive-img {
+    max-width: 100% !important;
+  }
+  .scrollable-container {
+    width: 100% !important;
+  }
+}
+
+.navbar-nav {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.nav-item {
+  position: relative;
+  margin: 0 15px; 
+}
+
+.nav-link {
+  padding: 10px 0;
+  position: relative;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  display: block;
+  margin-top: 5px;
+  right: 0;
+  background: white;
+  transition: width 0.4s ease;
+  -webkit-transition: width 0.4s ease;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+  left: 0;
+  background: white;
+}
+
+.nav-link.active::after {
+  width: 100%;
+  left: 0;
+  background: white;
+}
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba%28255, 255, 255, 1%29' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+.contact-card {
+  border: 1px solid #ffffff9c;
+  background: transparent;
+  width: 50%; 
+}
+
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+}
+
+.form-control {
+  border: 1px solid #ced4da; 
+  color: #fff; 
+}
+
+.form-control:focus {
+  border-color: #198754; 
+  box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.25); 
+  color: #fff; 
+}
+
+.card-link {
+  text-decoration: none; 
+  color: inherit; 
+  display: block; 
+}
+
+.card-link .card {
+  transition: transform 0.3s ease;
+  color: inherit; 
+}
+
+.card-link .card:hover {
+  transform: scale(1.05); 
+}
+
+.card-link:focus,
+.card-link:active,
+.card-link:hover {
+  outline: none; 
+  color: inherit; 
+}
+
+.responsive-img {
+  max-width: 60%;
+  width: auto;
+  transition: max-width 0.3s ease-in-out;
+}
+
+.scrollable-container {
+  width: 70%;
+  max-height: 500px; 
+  overflow-y: auto; 
+}
+.full-size-image {
+  width: 100%;
+  height: auto; 
+}
+
+/* Connect 4 Game */
+
+#connect4-board {
+  border-collapse: collapse;
+  width: 100%;
+  max-width: 600px; 
+  height: auto;
+  background-color: blue;
+  border: 10px solid navy;
+}
+
+#connect4-board td {
+  width: 14.28%; 
+  padding-top: calc(100% / 8); 
+  position: relative;
+  border: 1px solid #ffffff;
+  cursor: pointer;
+}
+
+#connect4-board td div {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); 
+  height: 70%; 
+  width: 70%;
+  border-radius: 50%;
+  border: 5px solid navy;
+}
+
+.empty {
+  background-color: rgb(255, 255, 255) !important;
+}
+
+.player1 {
+  background-color: red !important;
+}
+
+.player2 {
+  background-color: yellow !important;
+}

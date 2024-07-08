@@ -1,0 +1,169 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Resume - Personal Portfolio{% endblock %}
+
+{% block content %}
+<!-- Page Content-->
+<div class="container px-5 my-5">
+    <div class="text-center mb-5">
+        <h1 class="display-5 fw-bolder mb-0"><span class="text-gradient d-inline">Resume</span></h1>
+    </div>
+    <div class="row gx-5 justify-content-center">
+        <div class="col-lg-11 col-xl-9 col-xxl-8">
+            <!-- Experience Section-->
+            <section>
+                <div class="d-flex align-items-center justify-content-between mb-4">
+                    <h2 class="text-success fw-bolder mb-0">Experience</h2>
+                    <!-- Download resume button-->
+                    <a class="btn btn-success px-4 py-3" href="#!">
+                        <div class="d-inline-block bi bi-download me-2"></div>
+                        Download Resume
+                    </a>
+                </div>
+                <!-- Experience Card 1-->
+                <div class="card shadow bg-secondary border-light rounded-4 mb-5">
+                    <div class="card-body p-5">
+                        <div class="row align-items-center gx-5">
+                            <div class="col text-center text-lg-start mb-4 mb-lg-0">
+                                <div class="bg-secondary p-4 rounded-4">
+                                    <div class="fs-5 fw-light mb-2">05/24 - Now</div>
+                                    <div class="small fw-light fst-italic">Data Science and Machine Learning Projects</div>
+                                </div>
+                            </div>
+                            <div class="col-lg-8">
+                                <div>
+                                    Since completing my final thesis in mid-May, I have focused on deepening my knowledge in Python 
+                                    and Data Science. During the last months of my university studies, I realized more and more that 
+                                    I am particularly interested the computer science aspect, especially Data Science. 
+                                    To enhance my skills, I took online courses, including Harvard's CS50, CS109a (Introduction to Data Science), 
+                                    and  CS50’s Artificial Intelligence class. While I was familiar with many of the concepts, revisiting them 
+                                    provided a different perspective and improved my understanding. Most importantly, I worked on several practical projects 
+                                    (available in the Projects section) to apply these concepts to real-world applications.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card shadow bg-secondary border-light rounded-4 mb-5">
+                    <div class="card-body p-5">
+                        <div class="row align-items-center gx-5">
+                            <div class="col text-center text-lg-start mb-4 mb-lg-0">
+                                <div class="bg-secondary p-4 rounded-4">
+                                    <div class="fs-5 fw-light mb-2">12/23 - 5/24</div>
+                                    <div class="small fw-normal mb-2">Robotics</div>
+                                    <div class="small fw-light fst-italic">University Augsburg</div>
+                                </div>
+                            </div>
+                            <div class="col-lg-8">
+                                <div>
+                                    As part of a practical robotics course at my university, I was responsible for 
+                                    developing and testing a robotic arm. My key tasks included designing the robotic arm 
+                                    using CAD software, selecting and integrating electronic components, 3D printing 
+                                    various parts, and writing and debugging C++ code for Arduino to control the arm via a CAN network.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card shadow bg-secondary border-light rounded-4 mb-5">
+                    <div class="card-body p-5">
+                        <div class="row align-items-center gx-5">
+                            <div class="col text-center text-lg-start mb-4 mb-lg-0">
+                                <div class="bg-secondary p-4 rounded-4">
+                                    <div class="fs-5 fw-light mb-2">11/21 - 9/23</div>
+                                    <div class="small fw-normal mb-2">Web Developer</div>
+                                    <div class="small fw-light fst-italic">University Augsburg</div>
+                                </div>
+                            </div>
+                            <div class="col-lg-8">
+                                <div>
+                                    I developed a comprehensive Django-based website, incorporating complex data structures and advanced functionalities like 
+                                    like elastic search for a big database. I gained valuable experience frontend design utilizing HTML (Bootstrap 5), CSS, and JavaScript. 
+                                    Ultimately, I successfully deployed the project on a Linux server for internal use in the University Library.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <!-- Education Section-->
+            <section>
+                <h2 class="text-success fw-bolder mb-4">Education</h2>
+                <!-- Education Card 1-->
+                <div class="card shadow bg-secondary border-light rounded-4 mb-5">
+                    <div class="card-body p-5">
+                        <div class="row align-items-center gx-5">
+                            <div class="col text-center text-lg-start mb-4 mb-lg-0">
+                                <div class="bg-secondary p-4 rounded-4">
+                                    <div class="fs-5 text-light fw-light mb-2">10/20 - 5/2024</div>
+                                    <div class="mb-2">
+                                        <div class="small fw-normal">University Augsburg</div>
+                                    </div>
+                                    <div class="fst-italic">
+                                        <div class="small mt-3">Computer Science and Engineering</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-8">
+                                <div>
+                                    As a recent graduate with a Bachelor of Science in Engineering Informatics from Universität Augsburg, 
+                                    I have developed a strong foundation in both computer science and engineering. 
+                                    I gained a lot of theoretical knowledge in mathematics, physics, computer science, 
+                                    and engineering, and applied this in numerous practical projects. These projects were 
+                                    always the most fun for me, since I love working on real-world problems. 
+                                    The most important skills I learned were an analytical approach to complex problem-solving and the 
+                                    ability to work effectively in a team to overcome difficult challenges.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <div class="pb-5"></div>
+            <!-- Skills Section-->
+            <section>
+                <!-- Skillset Card-->
+                <div class="card shadow bg-secondary border-light rounded-4 mb-5">
+                    <div class="card-body p-5">
+                        <!-- Professional skills list-->
+                        <div class="mb-5">
+                            <div class="d-flex align-items-center mb-4">
+                                <div class="feature bg-success bg-gradient-primary-to-secondary text-white rounded-3 me-3"><i class="bi bi-tools"></i></div>
+                                <h3 class="fw-normal mb-0"><span class="text-gradient d-inline">Professional Skills</span></h3>
+                            </div>
+                            <div class="row row-cols-1 row-cols-md-3 mb-4">
+                                <div class="col mb-4 mb-md-0"><div class="d-flex align-items-center bg-secondary border border-light rounded-4 p-3 h-100">Data Manipulation and Analysis</div></div>
+                                <div class="col mb-4 mb-md-0"><div class="d-flex align-items-center bg-secondary border border-light rounded-4 p-3 h-100">Data Visualization</div></div>
+                                <div class="col"><div class="d-flex align-items-center bg-secondary border border-light rounded-4 p-3 h-100">Statistical Analysis</div></div>
+                            </div>
+                            <div class="row row-cols-1 row-cols-md-3 mb-4">
+                                <div class="col mb-4 mb-md-0"><div class="d-flex align-items-center bg-secondary border border-light rounded-4 p-3 h-100">Machine Learning Basics</div></div>
+                                <div class="col mb-4 mb-md-0"><div class="d-flex align-items-center bg-secondary border border-light rounded-4 p-3 h-100">Efficient Coding, Enhanced by AI-Tools</div></div>
+                                <div class="col"><div class="d-flex align-items-center bg-secondary border border-light rounded-4 p-3 h-100">Web Development</div></div>
+                            </div>
+                        </div>
+                        <!-- Languages list-->
+                        <div class="mb-0">
+                            <div class="d-flex align-items-center mb-4">
+                                <div class="feature bg-success bg-gradient-primary-to-secondary text-white rounded-3 me-3"><i class="bi bi-code-slash"></i></div>
+                                <h3 class="fw-normal mb-0"><span class="text-gradient d-inline">Languages</span></h3>
+                            </div>
+                            <div class="row row-cols-1 row-cols-md-3 mb-4">
+                                <div class="col mb-4 mb-md-0"><div class="d-flex align-items-center bg-secondary border border-light rounded-4 p-3 h-100">Python</div></div>
+                                <div class="col mb-4 mb-md-0"><div class="d-flex align-items-center bg-secondary border border-light rounded-4 p-3 h-100">C/C++</div></div>
+                                <div class="col"><div class="d-flex align-items-center bg-secondary border border-light rounded-4 p-3 h-100">HTML</div></div>
+                            </div>
+                            <div class="row row-cols-1 row-cols-md-3">
+                                <div class="col mb-4 mb-md-0"><div class="d-flex align-items-center bg-secondary border border-light rounded-4 p-3 h-100">CSS</div></div>
+                                <div class="col mb-4 mb-md-0"><div class="d-flex align-items-center bg-secondary border border-light rounded-4 p-3 h-100">Git</div></div>
+                                <div class="col"><div class="d-flex align-items-center bg-secondary border border-light rounded-4 p-3 h-100">Java</div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
