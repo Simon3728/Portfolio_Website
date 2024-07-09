@@ -36,7 +36,7 @@ def main():
     # Process each file and combine the data
     all_data = pd.DataFrame()
     for file_name in file_paths:
-        file_path = os.path.join(base_path, file_name)
+        file_path = os.path.join(BASE_DIR, 'us_election', 'Data_Files', file_name)
         data_percentage = read_and_process_file(file_path)
         all_data = pd.concat([all_data, data_percentage], ignore_index=True)
     
