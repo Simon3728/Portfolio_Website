@@ -26,7 +26,6 @@ state_names = {
 }
 
 def main():
-    base_path = 'c:/Users/Simon/Desktop/Portfolio_Website/myportfolio/us_election/Data_Files/Election'
     file_paths = [
         'president_2000.txt', 'president_2004.txt', 
         'president_2008.txt', 'president_2012.txt', 
@@ -36,7 +35,7 @@ def main():
     # Process each file and combine the data
     all_data = pd.DataFrame()
     for file_name in file_paths:
-        file_path = os.path.join(BASE_DIR, 'us_election', 'Data_Files', file_name)
+        file_path = os.path.join(BASE_DIR, 'us_election', 'Data_Files', 'Election', file_name)
         data_percentage = read_and_process_file(file_path)
         all_data = pd.concat([all_data, data_percentage], ignore_index=True)
     
