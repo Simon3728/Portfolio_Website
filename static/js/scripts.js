@@ -48,19 +48,23 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    board.addEventListener('click', (event) => {
-        if (gameOver) return;
-        const cell = event.target.closest('td');
-        const column = cell ? cell.dataset.column : undefined;
+    if (board) {
+        board.addEventListener('click', (event) => {
+            if (gameOver) return;
+            const cell = event.target.closest('td');
+            const column = cell ? cell.dataset.column : undefined;
 
-        if (column !== undefined) {
-            makeMove(column);
-        }
-    });
+            if (column !== undefined) {
+                makeMove(column);
+            }
+        });
+    }
 
-    resetButton.addEventListener('click', () => {
-        resetGame();
-    });
+    if (resetButton) {
+        resetButton.addEventListener('click', () => {
+            resetGame();
+        });
+    }
 
     function makeMove(column) {
         fetch('', {
@@ -78,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
             updateBoard(data.board);
-            updateCurrentPlayer(data.current_player); // Ensure update here
+            updateCurrentPlayer(data.current_player);
             checkGameState(data);
             if (!data.winner && !data.draw && data.current_player === 2) {
                 makeAIMove();
@@ -94,12 +98,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 'Content-Type': 'application/json',
                 'X-CSRFToken': getCookie('csrftoken')
             },
-            body: JSON.stringify({ column: null }) 
+            body: JSON.stringify({ column: null })
         })
         .then(response => response.json())
         .then(data => {
             updateBoard(data.board);
-            updateCurrentPlayer(data.current_player); // Ensure update here
+            updateCurrentPlayer(data.current_player);
             checkGameState(data);
         })
         .catch(error => console.error('Error:', error));
@@ -146,7 +150,7 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(data => {
             updateBoard(data.board);
             document.getElementById('game-messages').innerText = '';
-            updateCurrentPlayer(data.current_player); // Ensure update here
+            updateCurrentPlayer(data.current_player);
             gameOver = false;
         })
         .catch(error => console.error('Error:', error));
@@ -168,5 +172,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Initialize the board with the starting state
-    resetGame();
+    if (board && resetButton) {
+        resetGame();
+    }
 });
