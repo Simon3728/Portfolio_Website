@@ -2,13 +2,13 @@
 from django import forms
 from .models import PopulationData
 
-# Fetch unique states and years from PopulationData model
-states = PopulationData.objects.values_list('name', flat=True).distinct().order_by('name')
-years = PopulationData.objects.values_list('year', flat=True).distinct().order_by('year')
+def get_state_choices():
+    states = PopulationData.objects.values_list('name', flat=True).distinct().order_by('name')
+    return [(state, state) for state in states]
 
-# Create choice tuples for the form fields
-STATE_CHOICES = [(state, state) for state in states]
-YEAR_CHOICES = [(year, year) for year in years]
+def get_year_choices():
+    years = PopulationData.objects.values_list('year', flat=True).distinct().order_by('year')
+    return [(year, year) for year in years]
 
 ELECTION_YEAR_CHOICES = [
     ('2000', '2000'),
@@ -21,12 +21,12 @@ ELECTION_YEAR_CHOICES = [
 
 class PopulationForm(forms.Form):
     state = forms.ChoiceField(
-        choices=STATE_CHOICES, 
+        choices=get_state_choices, 
         label="Select State", 
         widget=forms.Select(attrs={'class': 'form-select'})
     )
     year = forms.ChoiceField(
-        choices=YEAR_CHOICES, 
+        choices=get_year_choices, 
         label="Select Year", 
         widget=forms.Select(attrs={'class': 'form-select'})
     )
