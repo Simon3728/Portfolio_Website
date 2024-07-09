@@ -33,10 +33,12 @@ def contact(request):
             subject = form.cleaned_data['subject']
             message = form.cleaned_data['message']
             
+            full_message = f"Message from {name} ({email}):\n\n{message}"
+
             # Send email
             send_mail(
                 subject,
-                message,
+                full_message,
                 email,
                 ['simon-wellnhofer@gmx.de'],
                 fail_silently=False,
