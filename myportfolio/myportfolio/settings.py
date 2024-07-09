@@ -41,8 +41,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'portfolio',
-    'us_election',
+    'myportfolio.portfolio',
+    'myportfolio.us_election',
+    'myportfolio.connect4',
 ]
 
 MIDDLEWARE = [
