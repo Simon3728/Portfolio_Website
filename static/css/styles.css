@@ -72,6 +72,10 @@
   .scrollable-container {
     width: 100% !important;
   }
+  .container {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
 }
 
 .navbar-nav {
