@@ -3,9 +3,73 @@
  html, body {
   background-color: #1f1f1f !important;
   color: #fff;
-  font-family: "Roboto", sans-serif;
+  font-family: "Montserrat", sans-serif;
 }
 
+/* COllapsable content */
+.collapsible-heading {
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.collapsible-heading .arrow {
+  font-size: 1.5rem;
+  transition: transform 0.35s ease, content 0.35s ease;
+  display: inline-flex;
+  align-items: center;
+  color: var(--bs-success);
+}
+
+.collapsed .arrow::before {
+  content: '\f138'; /* Bootstrap Icons arrow right */
+}
+
+.collapsible-heading:not(.collapsed) .arrow::before {
+  content: '\f128'; /* Bootstrap Icons arrow down */
+}
+
+.separator {
+  border-bottom: 1px solid #fff;
+  width: 100%;
+}
+
+/* Different font wheights */
+.font-weight-700 {
+  font-weight: 700 !important;
+}
+.font-weight-800 {
+  font-weight: 800 !important;
+}
+.font-weight-900 {
+  font-weight: 900 !important;
+}
+
+/* Override Success Color */
+.btn-success {
+  background-color: #42b378 !important;
+  border-color: #42b378 !important;
+}
+
+.btn-success:hover {
+  background-color: #1d8d51 !important; /* Slightly darker shade */
+  border-color: #1d8d51 !important; /* Slightly darker shade */
+}
+
+.text-success {
+  color: #52D18F !important;
+}
+
+.social-icons a:hover .bi {
+  color: #52D18F; /* Replace with your desired color */
+}
+
+.custom-bg {
+  background-color: #52D18F !important; /* Replace with your desired color */
+}
+
+/* Profil card on main page */
 .profil-card {
   background-color: transparent !important;
   border-radius: 30px;
@@ -48,6 +112,7 @@
   text-decoration: none;
 }
 
+/* If screen is smaller */
 @media (max-width: 992px) {
   .fixed-box {
     height: 100%;
@@ -78,6 +143,7 @@
   }
 }
 
+/* Navbar Styling */
 .navbar-nav {
   display: flex;
   justify-content: center;
@@ -123,6 +189,7 @@
   background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba%28255, 255, 255, 1%29' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
 }
 
+/* Contact card */
 .contact-card {
   border: 1px solid #ffffff9c;
   background: transparent;
@@ -142,11 +209,12 @@
 }
 
 .form-control:focus {
-  border-color: #198754; 
-  box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.25); 
+  border-color: #52D18F; 
+  box-shadow: 0 0 0 0.25rem rgba(82, 209, 143, 0.411); 
   color: #fff; 
 }
 
+/* Cards for resumen and projects */
 .card-link {
   text-decoration: none; 
   color: inherit; 
@@ -168,7 +236,18 @@
   outline: none; 
   color: inherit; 
 }
+/* New styles for specific cards */
+.custom-card .card {
+  transition: transform 0.3s ease, background-color 0.3s ease !important;
+  background-color: transparent !important; /* Make the background transparent */
+  border: 1px solid white !important; /* Set border to white */
+}
 
+.custom-card .card:hover {
+  background-color: #52D18F !important; /* Change to desired background color on hover */
+}
+
+/* Image US-Election */
 .responsive-img {
   max-width: 60%;
   width: auto;

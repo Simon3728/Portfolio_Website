@@ -10,7 +10,7 @@
         <p class="mb-5">
             In this project I implemented a AI for playing the Connect 4 game. I tried 2 different methodes: the MiniMax-Algorithm and
             the Monte Carlo Tree Search, however only the MiniMax-Algorithm is working well. In this page i will explain you how it works,
-            but first you can try to beat it: 
+            but first you can try to beat it (sometimes it is not working on phones): 
         </p>
         <div id="current-player" class="text-center mb-3" style="width: 200px; margin: 0 auto; font-weight: bold; padding: 10px; border-radius: 5px; text-align: center;"></div>
         <div class="d-flex justify-content-center mb-4">
@@ -31,193 +31,211 @@
         <div class="d-flex justify-content-center">
             <button id="reset-button" class="btn btn-primary">Reset Game</button>
         </div>
-        <h2 class="mt-5">MiniMax Algorithm</h2>
-        <p>
-            The Minimax algorithm is a decision-making tool used primarily in games to determine the best move for a player, assuming the opponent 
-            also plays optimally. It's particularly useful in two-player zero-sum games like chess, tic-tac-toe, and Connect 4, where one player's 
-            gain is the other player's loss.
-        </p>
-        <p>
-            The Minimax algorithm helps you decide your next move by considering all possible moves 
-            you and your opponent can make, looking ahead several steps. It evaluates the possible outcomes and chooses the move that maximizes 
-            your chances of winning while minimizing the opponent's chances.
-        </p>
-        <p>
-            Here's how it works:
-        </p>
-        <ul>
-            <li>
-                <strong>Maximizing and Minimizing Players:</strong> In Minimax, one player is the maximizer (trying to get the highest score), 
-                and the other is the minimizer (trying to get the lowest score). In a game, you can think of yourself as the maximizer and your opponent as the minimizer.
-            </li>
-            <li>
-                <strong>Game Tree:</strong> The algorithm constructs a "game tree" where each node represents a possible game state, and each branch
-                represents a possible move. The tree starts with the current game state and branches out to show all possible moves and their outcomes.
-            </li>
-            <li>
-                <strong>Recursive Exploration:</strong> The algorithm explores the game tree recursively. At each level, it alternates between the maximizer and minimizer, 
-                evaluating the potential outcomes of their moves.
-            </li>
-            <li>
-                <strong>Leaf Nodes and Evaluation:</strong> When the algorithm reaches the maximum depth of exploration or a terminal game state (win, lose, or draw), 
-                it evaluates the game state using a scoring function. This score reflects how favorable the state is for the maximizer. 
-                Additionally, evaluations can occur at intermediate nodes to guide the pruning process in more complex implementations.
-            </li>
-            <li>
-                <strong>Backtracking and Decision Making:</strong> After evaluating the nodes, whether at the leaf or intermediate levels, 
-                the algorithm backtracks through the tree, choosing the move that maximizes the score for the maximizer and minimizes 
-                the score for the minimizer at each level. This back-and-forth continues until it reaches the top of the tree, where the best move is selected.
-            </li>
-        </ul>
-        <p>
-            In summary, the Minimax algorithm is a tool for making strategic decisions in competitive games. 
-            It ensures that you consider both your potential moves and your opponent's responses, ultimately 
-            guiding you to the move that gives you the best chance of winning.
-        </p>
+        <h2 class="text-success mt-5 collapsible-heading collapsed" data-bs-toggle="collapse" href="#minimax" role="button" aria-expanded="false" aria-controls="minimax">
+            MiniMax Algorithm <span class="arrow bi text-success"></span>
+        </h2>
+        <div class="collapse" id="minimax">
+            <p>
+                The Minimax algorithm is a decision-making tool used primarily in games to determine the best move for a player, assuming the opponent 
+                also plays optimally. It's particularly useful in two-player zero-sum games like chess, tic-tac-toe, and Connect 4, where one player's 
+                gain is the other player's loss.
+            </p>
+            <p>
+                The Minimax algorithm helps you decide your next move by considering all possible moves 
+                you and your opponent can make, looking ahead several steps. It evaluates the possible outcomes and chooses the move that maximizes 
+                your chances of winning while minimizing the opponent's chances.
+            </p>
+            <p>
+                Here's how it works:
+            </p>
+            <ul>
+                <li>
+                    <strong>Maximizing and Minimizing Players:</strong> In Minimax, one player is the maximizer (trying to get the highest score), 
+                    and the other is the minimizer (trying to get the lowest score). In a game, you can think of yourself as the maximizer and your opponent as the minimizer.
+                </li>
+                <li>
+                    <strong>Game Tree:</strong> The algorithm constructs a "game tree" where each node represents a possible game state, and each branch
+                    represents a possible move. The tree starts with the current game state and branches out to show all possible moves and their outcomes.
+                </li>
+                <li>
+                    <strong>Recursive Exploration:</strong> The algorithm explores the game tree recursively. At each level, it alternates between the maximizer and minimizer, 
+                    evaluating the potential outcomes of their moves.
+                </li>
+                <li>
+                    <strong>Leaf Nodes and Evaluation:</strong> When the algorithm reaches the maximum depth of exploration or a terminal game state (win, lose, or draw), 
+                    it evaluates the game state using a scoring function. This score reflects how favorable the state is for the maximizer. 
+                    Additionally, evaluations can occur at intermediate nodes to guide the pruning process in more complex implementations.
+                </li>
+                <li>
+                    <strong>Backtracking and Decision Making:</strong> After evaluating the nodes, whether at the leaf or intermediate levels, 
+                    the algorithm backtracks through the tree, choosing the move that maximizes the score for the maximizer and minimizes 
+                    the score for the minimizer at each level. This back-and-forth continues until it reaches the top of the tree, where the best move is selected.
+                </li>
+            </ul>
+            <p>
+                In summary, the Minimax algorithm is a tool for making strategic decisions in competitive games. 
+                It ensures that you consider both your potential moves and your opponent's responses, ultimately 
+                guiding you to the move that gives you the best chance of winning.
+            </p>
+        </div>
+        <div class="separator my-4"></div>
+        <h2 class="text-success collapsible-heading collapsed" data-bs-toggle="collapse" href="#challenges" role="button" aria-expanded="false" aria-controls="minimax">
+            Challenges and Heuristics in Minimax Algorithm <span class="arrow bi text-success"></span>
+        </h2>
+        <div class="collapse" id="challenges">
+            <h4>Challenges</h4>
+            <p>
+                Of course there are also some challenges that impact its efficiency and effectiveness:
+            </p>
+            <ul>
+                <li>
+                    <strong>Computational Complexity:</strong> The game tree for many games can grow exponentially with the number of moves, leading to a 
+                    vast number of possible states to evaluate. For instance, in games like chess, the number of possible game states can be astronomically 
+                    high, making it impossible to explore the entire tree.
+                </li>
+                <li>
+                    <strong>Depth Limitation:</strong> To manage computational resources, the Minimax algorithm often limits the depth of the tree it explores. 
+                    This can result in suboptimal decisions if critical moves or game states lie beyond the explored depth.
+                </li>
+                <li>
+                    <strong>Evaluation Function Quality:</strong> The effectiveness of the Minimax algorithm heavily depends on the quality 
+                    of the evaluation function used to score the game states. An inaccurate or simplistic evaluation function can lead to poor decision-making.
+                </li>
+            </ul>
+            <h4>Heuristic Evaluation</h4>
+            <p>
+                To address some of these challenges, especially the computational complexity, the Minimax algorithm often relies on heuristics. 
+                A heuristic is a simplified evaluation function used to estimate the value of a game state without exploring 
+                all possible future states.
+            </p>
+            <p>
+                In the context of the Minimax algorithm, heuristics evaluate the board state at different levels of the game tree, 
+                providing scores that guide the decision-making process. Here's how heuristics typically work:
+            </p>
+            <ul>
+                <li>
+                    <strong>Scoring Function:</strong> The heuristic uses a scoring function to evaluate the board state. 
+                    This function assigns scores based on various factors such as the number of pieces controlled, potential threats, 
+                    and opportunities for future moves.
+                </li>
+                <li>
+                    <strong>Positional Advantage:</strong> Heuristics often consider the positional advantage, such as controlling 
+                    the center of the board in chess or having more potential winning lines in Connect 4. Pieces in strategically 
+                    valuable positions receive higher scores.
+                </li>
+                <li>
+                    <strong>Material Advantage:</strong> The heuristic can evaluate the material advantage, such as the difference 
+                    in the number of pieces each player has. In games like chess, capturing an opponent's piece increases the score.
+                </li>
+                <li>
+                    <strong>Potential Moves and Threats:</strong> Heuristics evaluate potential future moves and threats. 
+                    For example, in Connect 4, having multiple ways to connect four pieces can significantly increase the score.
+                </li>
+            </ul>
+            <p>
+                Designing an effective heuristic involves balancing simplicity and accuracy. A good heuristic should provide meaningful 
+                evaluations that guide the algorithm towards optimal decisions without being too computationally expensive.
+            </p>
+        </div>
+        <div class="separator my-4"></div>
+        <h2 class="text-success collapsible-heading collapsed" data-bs-toggle="collapse" href="#implementation" role="button" aria-expanded="false" aria-controls="minimax">
+            My Implementation <span class="arrow bi text-success"></span>
+        </h2>
+        <div class="collapse" id="implementation">
+            <h4>General Approach</h4>
+            <p>
+                In my implementation of the Minimax algorithm for the Connect-4 game, I needed one good Heuristic to evaluate the game state and ways to optimise 
+                the descicion making, since there are 4,531,985,219,092 possible game positions and obviously I cant check all.
+            </p>
+            <p>
+                For this reason I only simulate all possible moves up to a certain depth (I mostly use a depth of 5) and evaluate the 
+                resulting board states using my heuristic function and an optimization called alphy-beta prunning. But first I will start with explaining the Heuristic. 
+            </p>
 
-        <h2 class="mt-5">Challenges and Heuristics in Minimax Algorithm</h2>
-        <h4>Challenges</h4>
-        <p>
-            Of course there are also some challenges that impact its efficiency and effectiveness:
-        </p>
-        <ul>
-            <li>
-                <strong>Computational Complexity:</strong> The game tree for many games can grow exponentially with the number of moves, leading to a 
-                vast number of possible states to evaluate. For instance, in games like chess, the number of possible game states can be astronomically 
-                high, making it impossible to explore the entire tree.
-            </li>
-            <li>
-                <strong>Depth Limitation:</strong> To manage computational resources, the Minimax algorithm often limits the depth of the tree it explores. 
-                This can result in suboptimal decisions if critical moves or game states lie beyond the explored depth.
-            </li>
-            <li>
-                <strong>Evaluation Function Quality:</strong> The effectiveness of the Minimax algorithm heavily depends on the quality 
-                of the evaluation function used to score the game states. An inaccurate or simplistic evaluation function can lead to poor decision-making.
-            </li>
-        </ul>
-        <h4>Heuristic Evaluation</h4>
-        <p>
-            To address some of these challenges, especially the computational complexity, the Minimax algorithm often relies on heuristics. 
-            A heuristic is a simplified evaluation function used to estimate the value of a game state without exploring 
-            all possible future states.
-        </p>
-        <p>
-            In the context of the Minimax algorithm, heuristics evaluate the board state at different levels of the game tree, 
-            providing scores that guide the decision-making process. Here's how heuristics typically work:
-        </p>
-        <ul>
-            <li>
-                <strong>Scoring Function:</strong> The heuristic uses a scoring function to evaluate the board state. 
-                This function assigns scores based on various factors such as the number of pieces controlled, potential threats, 
-                and opportunities for future moves.
-            </li>
-            <li>
-                <strong>Positional Advantage:</strong> Heuristics often consider the positional advantage, such as controlling 
-                the center of the board in chess or having more potential winning lines in Connect 4. Pieces in strategically 
-                valuable positions receive higher scores.
-            </li>
-            <li>
-                <strong>Material Advantage:</strong> The heuristic can evaluate the material advantage, such as the difference 
-                in the number of pieces each player has. In games like chess, capturing an opponent's piece increases the score.
-            </li>
-            <li>
-                <strong>Potential Moves and Threats:</strong> Heuristics evaluate potential future moves and threats. 
-                For example, in Connect 4, having multiple ways to connect four pieces can significantly increase the score.
-            </li>
-        </ul>
-        <p>
-            Designing an effective heuristic involves balancing simplicity and accuracy. A good heuristic should provide meaningful 
-            evaluations that guide the algorithm towards optimal decisions without being too computationally expensive.
-        </p>
-        <h2 class="mt-5">My Implementation</h2>
-        <h4>General Approach</h4>
-        <p>
-            In my implementation of the Minimax algorithm for the Connect-4 game, I needed one good Heuristic to evaluate the game state and ways to optimise 
-            the descicion making, since there are 4,531,985,219,092 possible game positions and obviously I cant check all.
-        </p>
-        <p>
-            For this reason I only simulate all possible moves up to a certain depth (I mostly use a depth of 5) and evaluate the 
-            resulting board states using my heuristic function and an optimization called alphy-beta prunning. But first I will start with explaining the Heuristic. 
-        </p>
+            <h4>Heuristic Evaluation</h4>
+            <p>
+                My implementation uses an modified version from the Heuristic-1 as described in the research paper
+                <a href="https://www.scirp.org/html/1-9601415_90972.htm" class="text-reset">Research on Different Heuristics for Minimax Algorithm Insight from Connect-4 Game</a>
+                by Xiyu Kang, Yiqi Wang and Yanrui Hu.
+                This heuristic evaluates the board based on four key features:
+            </p>
+            <ul>
+                <li>
+                    <strong>Absolute Win:</strong> This feature identifies a winning state for one of the players. If a player has four connected pieces 
+                    horizontally, vertically, or diagonally, it indicates an absolute win. This state is given an really high score, as it signifies the 
+                    end of the game with a clear winner.
+                </li>
+                <li>
+                    <strong>Three Connected Pieces:</strong> This feature evaluates situations where a player has three connected pieces. 
+                    The value assigned depends on the potential to complete a four-in-a-row:
+                    <ul>
+                        <li>If only one space is available, the score is high, reflecting a strong potential for a win.</li>
+                        <li>If no spaces are available, the score is zero, as it does not contribute to a winning move.</li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>Two Connected Pieces:</strong> This feature evaluates situations where a player has two connected pieces. 
+                    The exact score depends on how many free spaces there are next to them. For more available spaces the 
+                    score will be better, since it indicats better potential for future moves.
+                </li>
+                <li><strong>Single Piece:</strong> This feature evaluates individual pieces not connected to others. The score depends on the column position:
+                    <ul>
+                        <li>Pieces in central columns are valued higher due to their greater potential for forming connections.</li>
+                    </ul>
+                </li>
+            </ul>
+            <p>
+                The heuristic function calculates the total score by summing the values of all detected features on the board.This score represents how favorable 
+                the board state is for the AI, guiding the decision-making process.
+            </p>
+            <h4>Alpha-Beta Pruning</h4>
+            <p>
+                Alpha-beta pruning is a technique that improves the efficiency of the Minimax algorithm by reducing the number of nodes evaluated 
+                in the game tree. It uses two parameters, alpha and beta, which represent the minimum score the maximizing player can secure and 
+                the maximum score the minimizing player can secure. During the recursive exploration, if the algorithm finds that a branch cannot 
+                yield a better outcome than previously explored branches, it stops exploring that path. 
+                In my implementation, I use alpha-beta pruning to achieve faster results and to analyze deeper levels of the game tree.
+            </p>
 
-        <h4>Heuristic Evaluation</h4>
-        <p>
-            My implementation uses an modified version from the Heuristic-1 as described in the research paper
-            <a href="https://www.scirp.org/html/1-9601415_90972.htm" class="text-reset">Research on Different Heuristics for Minimax Algorithm Insight from Connect-4 Game</a>
-            by Xiyu Kang, Yiqi Wang and Yanrui Hu.
-            This heuristic evaluates the board based on four key features:
-        </p>
-        <ul>
-            <li>
-                <strong>Absolute Win:</strong> This feature identifies a winning state for one of the players. If a player has four connected pieces 
-                horizontally, vertically, or diagonally, it indicates an absolute win. This state is given an really high score, as it signifies the 
-                end of the game with a clear winner.
-            </li>
-            <li>
-                <strong>Three Connected Pieces:</strong> This feature evaluates situations where a player has three connected pieces. 
-                The value assigned depends on the potential to complete a four-in-a-row:
-                <ul>
-                    <li>If only one space is available, the score is high, reflecting a strong potential for a win.</li>
-                    <li>If no spaces are available, the score is zero, as it does not contribute to a winning move.</li>
-                </ul>
-            </li>
-            <li>
-                <strong>Two Connected Pieces:</strong> This feature evaluates situations where a player has two connected pieces. 
-                The exact score depends on how many free spaces there are next to them. For more available spaces the 
-                score will be better, since it indicats better potential for future moves.
-            </li>
-            <li><strong>Single Piece:</strong> This feature evaluates individual pieces not connected to others. The score depends on the column position:
-                <ul>
-                    <li>Pieces in central columns are valued higher due to their greater potential for forming connections.</li>
-                </ul>
-            </li>
-        </ul>
-        <p>
-            The heuristic function calculates the total score by summing the values of all detected features on the board.This score represents how favorable 
-            the board state is for the AI, guiding the decision-making process.
-        </p>
-        <h4>Alpha-Beta Pruning</h4>
-        <p>
-            Alpha-beta pruning is a technique that improves the efficiency of the Minimax algorithm by reducing the number of nodes evaluated 
-            in the game tree. It uses two parameters, alpha and beta, which represent the minimum score the maximizing player can secure and 
-            the maximum score the minimizing player can secure. During the recursive exploration, if the algorithm finds that a branch cannot 
-            yield a better outcome than previously explored branches, it stops exploring that path. 
-            In my implementation, I use alpha-beta pruning to achieve faster results and to analyze deeper levels of the game tree.
-        </p>
-
-        <h4>First 6 moves</h4>
-        <p>
-            I had a lot of problems with the first moves of the game, as the Minimax algorithm often made mistakes during these early stages.I try to 
-            change the heuristic in many ways to adapt to the early stages, but nothing seems to work effectively. For this reason I cheated a bit and get the
-            first 6 moves from a different AI, that you can find <a href="https://connect4.gamesolver.org/" class="text-reset">here</a>. 
-        </p>
-        <p>
-            I know this may not be the most elegant solution, but it works well. To get the moves, I strategically play all possible moves and see how this AI plays. 
-            To get the moves, I had to figure out where to click and then scan the board to find where the colored pieces are.
-            Additionally, I run this process in 12 windows in parallel, since it would have taken too long otherwitherwise. For the 6th move, there are already 16,000 possibilities
-            that all needed to be checked. I saved the moves in textfiles, which i search through with a binary search approach for the first 3 moves the AI makes.
-        </p>
-        <h2 class="mt-5">Conclusion</h2>
-        <p>
-            I am happy with the result of the Minimax Algorithm; in general, it plays quite well. 
-            However, it sometimes overlooks that the immediate next move could win or lose the game. 
-            I could not determine exactly why this happens, despite trying various adjustments to the heuristic. 
-            The main problem is that it is really hard to understand how the score for each move is calculated 
-            because of the many recursions. One thing I tried is to make the score value with a depth factor, which makes 
-            moves for the next step more important. But this did not work well, so I removed it again.
-        </p>
-        <p>
-            I also created my own heuristic, but this did not work as well as the modified version from the paper. Additionally, I tried using a 
-            bitstring for the game representation, which worked well, but it was more complicated to change something 
-            in the heuristic. The normal way was fast enough for me.
-        </p>
-        <p>
-            Additionally, I implemented a Monte Carlo Tree Search Algorithm, which you can also find in the GitHub 
-            project. However, it is not working so well, and I could not find the error. Since I wanted to move 
-            on to other projects, I did not spend more time on this, as the Minimax algorithm is already working well. 
-            But you can play against it in the Pygame I made; you just need to download this project 
-            from my <a href="https://github.com/Simon3728" class="text-reset">GitHub profile</a> and start the file main_pygame.py.
-        </p>
+            <h4>First 6 moves</h4>
+            <p>
+                I had a lot of problems with the first moves of the game, as the Minimax algorithm often made mistakes during these early stages.I try to 
+                change the heuristic in many ways to adapt to the early stages, but nothing seems to work effectively. For this reason I cheated a bit and get the
+                first 6 moves from a different AI, that you can find <a href="https://connect4.gamesolver.org/" class="text-reset">here</a>. 
+            </p>
+            <p>
+                I know this may not be the most elegant solution, but it works well. To get the moves, I strategically play all possible moves and see how this AI plays. 
+                To get the moves, I had to figure out where to click and then scan the board to find where the colored pieces are.
+                Additionally, I run this process in 12 windows in parallel, since it would have taken too long otherwitherwise. For the 6th move, there are already 16,000 possibilities
+                that all needed to be checked. I saved the moves in textfiles, which i search through with a binary search approach for the first 3 moves the AI makes.
+            </p>
+        </div>
+        <div class="separator my-4"></div>
+        <h2 class="text-success collapsible-heading collapsed" data-bs-toggle="collapse" href="#conclusion" role="button" aria-expanded="false" aria-controls="minimax">
+            Conclusion <span class="arrow bi text-success"></span>
+        </h2>
+        <div class="collapse" id="conclusion">
+            <p>
+                I am happy with the result of the Minimax Algorithm; in general, it plays quite well. 
+                However, it sometimes overlooks that the immediate next move could win or lose the game. 
+                I could not determine exactly why this happens, despite trying various adjustments to the heuristic. 
+                The main problem is that it is really hard to understand how the score for each move is calculated 
+                because of the many recursions. One thing I tried is to make the score value with a depth factor, which makes 
+                moves for the next step more important. But this did not work well, so I removed it again.
+            </p>
+            <p>
+                I also created my own heuristic, but this did not work as well as the modified version from the paper. Additionally, I tried using a 
+                bitstring for the game representation, which worked well, but it was more complicated to change something 
+                in the heuristic. The normal way was fast enough for me.
+            </p>
+            <p>
+                Additionally, I implemented a Monte Carlo Tree Search Algorithm, which you can also find in the GitHub 
+                project. However, it is not working so well, and I could not find the error. Since I wanted to move 
+                on to other projects, I did not spend more time on this, as the Minimax algorithm is already working well. 
+                But you can play against it in the Pygame I made; you just need to download this project 
+                from my <a href="https://github.com/Simon3728" class="text-reset">GitHub profile</a> and start the file main_pygame.py.
+            </p>
+        </div>
     </div>
 </section>
 {% endblock %}
