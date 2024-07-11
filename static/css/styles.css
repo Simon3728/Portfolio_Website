@@ -214,37 +214,41 @@
   color: #fff; 
 }
 
-/* Cards for resumen and projects */
+/* Cards for resumen */
+.custom-card2 {
+  background-color: transparent !important; /* Make the background transparent */
+  border: 1px solid white !important; /* Set border to white */
+  transition: transform 0.3s ease; /* Add transition for transform */
+}
+
+/* Ensure text color and other styles are inherited properly */
+.custom-card2 .card-body {
+  color: inherit; 
+}
+
+/* Cards for links*/
 .card-link {
   text-decoration: none; 
   color: inherit; 
   display: block; 
 }
 
-.card-link .card {
-  transition: transform 0.3s ease;
-  color: inherit; 
+/* Specific styles for custom-card */
+.custom-card {
+  background-color: transparent !important; /* Make the background transparent */
 }
 
-.card-link .card:hover {
-  transform: scale(1.05); 
-}
-
-.card-link:focus,
-.card-link:active,
-.card-link:hover {
-  outline: none; 
-  color: inherit; 
-}
-/* New styles for specific cards */
 .custom-card .card {
   transition: transform 0.3s ease, background-color 0.3s ease !important;
   background-color: transparent !important; /* Make the background transparent */
   border: 1px solid white !important; /* Set border to white */
+  color: inherit; 
 }
 
 .custom-card .card:hover {
+  transform: scale(1.05); 
   background-color: #52D18F !important; /* Change to desired background color on hover */
+  color: white;
 }
 
 /* Image US-Election */
