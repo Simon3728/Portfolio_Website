@@ -1,6 +1,6 @@
 # MyPortfolio
 
-MyPortfolio is a custom-built portfolio website created using Django. I chose to build my own website from scratch because I enjoyed the challenge of creating a fully customized user experience with code, rather than relying on a website builder. You can explore the final result here: [MyPortfolio](https://www.simon-wellnhofer.de/).
+MyPortfolio is a custom-built portfolio website created using Django. I chose to build my own website from scratch because I enjoyed the challenge of creating a fully customized user experience with code, rather than relying on a website builder. You can explore the final result here: [simon-wellnhofer.de](https://www.simon-wellnhofer.de/).
 
 ## Features
 
