@@ -1,8 +1,16 @@
+"""
+Script to verify and validate election data from the Django database.
+
+This script checks for data integrity by verifying the sum of votes,
+total vote consistency, and the presence of NULL or NaN values.
+"""
+
 import os
 import django
 import sys
 import math
 
+# Set up Django environment
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(BASE_DIR)
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'myportfolio.settings')
@@ -11,7 +19,7 @@ django.setup()
 from us_election.models import ElectionResult
 
 def main():
-    tolerance = 0.0001 # 0.01%
+    tolerance = 0.0001  # 0.01% tolerance for numerical comparisons
 
     rows = fetch_election_data()
 
@@ -19,9 +27,11 @@ def main():
 
     null_entries = check_for_null_values(rows)
 
+    # Print critical entries found during validation
     for entry in critical_entries:
         print(f"Critical Entry - ID: {entry[0]}, State: {entry[1]}, Year: {entry[2]}, Issue: {entry[3]}")
 
+    # Print entries with NULL or NaN values
     for entry in null_entries:
         print(f"Null Value Entry - ID: {entry[0]}, State: {entry[1]}, Year: {entry[2]}, Issue: {entry[3]}")
 
@@ -46,8 +56,8 @@ def validate_election_data(rows, tolerance):
 
     for row in rows:
         # Calculate the sum of the votes
-        votes_sum = (row[3] + row[4] + row[5])
-        # Check if age groups sum roughly equals total_population
+        votes_sum = row[3] + row[4] + row[5]
+        # Check if votes sum roughly equals total
         if not roughly_equal(votes_sum, row[6], tolerance):
             critical_entries.append((row[0], row[1], row[2], f'Votes sum mismatch: calculated sum={votes_sum}, total={row[6]}'))
 

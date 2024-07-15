@@ -1,3 +1,10 @@
+"""
+Views for the us_election app.
+
+This file defines the view functions for handling user requests, processing forms, 
+generating visualizations, and rendering the us_election page.
+"""
+
 from django.shortcuts import render
 from .forms import PopulationForm, ElectionYearForm
 import io
@@ -6,8 +13,13 @@ import matplotlib.pyplot as plt
 from .models import PopulationData
 from .visualize_election import generate_election_map
 
-# Create your views here.
 def us_election(request):
+    """
+    Handle requests to the US Election page.
+
+    This view processes user input from population and election year forms, generates 
+    visualizations, and renders the page with the updated context.
+    """
     select1_value = None
     select2_value = None
     updated_data = None
@@ -27,11 +39,12 @@ def us_election(request):
                 select1_value = form.cleaned_data['state']
                 select2_value = form.cleaned_data['year']
                 updated_data = f"Updated data based on selections: {select1_value}, {select2_value}"
+                
                 # Fetch data from the database
                 data = PopulationData.objects.filter(name=select1_value, year=select2_value).first()
                 if data:
-                    # Create bar chart
-                    fig, ax = plt.subplots()
+                    # Create bar chart for age group distribution
+                    _, ax = plt.subplots()
                     age_groups = ['0-4', '5-17', '18-24', '25-44', '45-64', '65+']
                     population_values = [
                         data.population_0_4, data.population_5_17, data.population_18_24,
@@ -46,22 +59,24 @@ def us_election(request):
                     buf = io.BytesIO()
                     plt.savefig(buf, format='png')
                     buf.seek(0)
+                    # Encode the bar chart image in base64
                     bar_chart_url = 'data:image/png;base64,' + base64.b64encode(buf.read()).decode('utf-8')
                     buf.close()
 
-                    # Create pie chart
-                    fig, ax = plt.subplots()
+                    # Create pie chart for gender distribution
+                    _, ax = plt.subplots()
                     labels = 'Male', 'Female'
                     sizes = [data.male_population, data.female_population]
                     colors = ['blue', 'red']
                     ax.pie(sizes, labels=labels, colors=colors, autopct='%1.1f%%', startangle=90)
-                    ax.axis('equal')  
+                    ax.axis('equal')
                     ax.set_title(f'Male vs Female Population in {select1_value} for {select2_value}')
 
                     # Save pie chart to a BytesIO object
                     buf = io.BytesIO()
                     plt.savefig(buf, format='png')
                     buf.seek(0)
+                    # Encode the pie chart image in base64
                     pie_chart_url = 'data:image/png;base64,' + base64.b64encode(buf.read()).decode('utf-8')
                     buf.close()
         elif form_type == 'election_year_form':
@@ -70,6 +85,7 @@ def us_election(request):
                 selected_election_year = year_form.cleaned_data['year']
                 # Generate the election map
                 buf = generate_election_map(selected_election_year)
+                # Encode the election map image in base64
                 election_map_url = 'data:image/png;base64,' + base64.b64encode(buf.read()).decode('utf-8')
                 buf.close()
 
@@ -85,6 +101,3 @@ def us_election(request):
         'election_map_url': election_map_url,
     }
     return render(request, 'projects/us_election.html', context)
-
-
-

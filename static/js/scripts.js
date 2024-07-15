@@ -1,23 +1,29 @@
+// jQuery document ready function to ensure the DOM is fully loaded before executing the script
 $(document).ready(function() {
+    // Handle form submission for PopulationForm using AJAX
     $('#PopulationForm').submit(function(event) {
         event.preventDefault();  // Prevent the form from submitting the traditional way
         $.ajax({
-            url: $(this).attr('action'),
-            type: $(this).attr('method'),
-            data: $(this).serialize(),
+            url: $(this).attr('action'),  // Use the form's action attribute as the URL
+            type: $(this).attr('method'),  // Use the form's method attribute for the request type
+            data: $(this).serialize(),  // Serialize the form data for submission
             success: function(data) {
+                // Update the #updateSection with the response data
                 const updateSection = $(data).find('#updateSection').html();
                 $('#updateSection').html(updateSection);
             }
         });
     });
+
+    // Handle form submission for ElectionYearForm using AJAX
     $('#ElectionYearForm').submit(function(event) {
         event.preventDefault();  // Prevent the form from submitting the traditional way
         $.ajax({
-            url: $(this).attr('action'),
-            type: $(this).attr('method'),
-            data: $(this).serialize(),
+            url: $(this).attr('action'),  // Use the form's action attribute as the URL
+            type: $(this).attr('method'),  // Use the form's method attribute for the request type
+            data: $(this).serialize(),  // Serialize the form data for submission
             success: function(data) {
+                // Update the #electionResultSection with the response data
                 const electionResultSection = $(data).find('#electionResultSection').html();
                 $('#electionResultSection').html(electionResultSection);
             }
@@ -25,14 +31,14 @@ $(document).ready(function() {
     });
 });
 
-// JS for Connect4
-
+// JS for Connect4 game functionality
 document.addEventListener('DOMContentLoaded', () => {
     const board = document.getElementById('connect4-board');
     const resetButton = document.getElementById('reset-button');
     const currentPlayerBox = document.getElementById('current-player');
     let gameOver = false;
 
+    // Function to update the current player display
     function updateCurrentPlayer(player) {
         if (!currentPlayerBox) {
             return;
@@ -48,75 +54,81 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // Add click event listener to the game board
     if (board) {
         board.addEventListener('click', (event) => {
-            if (gameOver) return;
-            const cell = event.target.closest('td');
-            const column = cell ? cell.dataset.column : undefined;
+            if (gameOver) return;  // Prevent actions if the game is over
+            const cell = event.target.closest('td');  // Get the clicked cell
+            const column = cell ? cell.dataset.column : undefined;  // Get the column of the clicked cell
 
             if (column !== undefined) {
-                makeMove(column);
+                makeMove(column);  // Make a move in the specified column
             }
         });
     }
 
+    // Add click event listener to the reset button
     if (resetButton) {
         resetButton.addEventListener('click', () => {
-            resetGame();
+            resetGame();  // Reset the game when the button is clicked
         });
     }
 
+    // Function to make a move in the specified column
     function makeMove(column) {
         fetch('', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'X-CSRFToken': getCookie('csrftoken')
+                'X-CSRFToken': getCookie('csrftoken')  // Include the CSRF token for security
             },
-            body: JSON.stringify({ column: column })
+            body: JSON.stringify({ column: column })  // Send the column index in the request body
         })
         .then(response => response.json())
         .then(data => {
             if (data.error) {
-                alert(data.error);
+                alert(data.error);  // Display an error message if there is an error
                 return;
             }
-            updateBoard(data.board);
-            updateCurrentPlayer(data.current_player);
-            checkGameState(data);
+            updateBoard(data.board);  // Update the game board with the new state
+            updateCurrentPlayer(data.current_player);  // Update the current player display
+            checkGameState(data);  // Check the game state for win/draw conditions
             if (!data.winner && !data.draw && data.current_player === 2) {
-                makeAIMove();
+                makeAIMove();  // Make a move for the AI if applicable
             }
         })
         .catch(error => console.error('Error:', error));
     }
 
+    // Function to make a move for the AI
     function makeAIMove() {
         fetch('', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'X-CSRFToken': getCookie('csrftoken')
+                'X-CSRFToken': getCookie('csrftoken')  // Include the CSRF token for security
             },
-            body: JSON.stringify({ column: null })
+            body: JSON.stringify({ column: null })  // Send a null column to indicate AI should move
         })
         .then(response => response.json())
         .then(data => {
-            updateBoard(data.board);
-            updateCurrentPlayer(data.current_player);
-            checkGameState(data);
+            updateBoard(data.board);  // Update the game board with the new state
+            updateCurrentPlayer(data.current_player);  // Update the current player display
+            checkGameState(data);  // Check the game state for win/draw conditions
         })
         .catch(error => console.error('Error:', error));
     }
 
+    // Function to update the game board
     function updateBoard(board) {
         const cells = document.querySelectorAll('#connect4-board td');
         cells.forEach(cell => {
             const row = cell.dataset.row;
             const col = cell.dataset.column;
             const div = cell.querySelector('div');
-            div.className = '';
+            div.className = '';  // Reset the cell's class
 
+            // Set the cell's class based on the board state
             if (board[row][col] === 1) {
                 div.classList.add('player1');
             } else if (board[row][col] === 2) {
@@ -127,35 +139,38 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Function to check the game state for win/draw conditions
     function checkGameState(data) {
         if (data.winner) {
             document.getElementById('game-messages').innerText = data.winner === 1 ? 'Player 1 wins!' : 'Player 2 wins!';
-            gameOver = true;
+            gameOver = true;  // Set the game over flag
         } else if (data.draw) {
             document.getElementById('game-messages').innerText = 'It\'s a draw!';
-            gameOver = true;
+            gameOver = true;  // Set the game over flag
         }
     }
 
+    // Function to reset the game
     function resetGame() {
         fetch('', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'X-CSRFToken': getCookie('csrftoken')
+                'X-CSRFToken': getCookie('csrftoken')  // Include the CSRF token for security
             },
-            body: JSON.stringify({ reset: true })
+            body: JSON.stringify({ reset: true })  // Send a reset command in the request body
         })
         .then(response => response.json())
         .then(data => {
-            updateBoard(data.board);
-            document.getElementById('game-messages').innerText = '';
-            updateCurrentPlayer(data.current_player);
-            gameOver = false;
+            updateBoard(data.board);  // Update the game board with the new state
+            document.getElementById('game-messages').innerText = '';  // Clear the game messages
+            updateCurrentPlayer(data.current_player);  // Update the current player display
+            gameOver = false;  // Reset the game over flag
         })
         .catch(error => console.error('Error:', error));
     }
 
+    // Function to get the CSRF token from cookies
     function getCookie(name) {
         let cookieValue = null;
         if (document.cookie && document.cookie !== '') {
@@ -173,6 +188,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initialize the board with the starting state
     if (board && resetButton) {
-        resetGame();
+        resetGame();  // Reset the game to its initial state
     }
 });

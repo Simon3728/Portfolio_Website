@@ -1,3 +1,8 @@
+"""
+This script reads election data from a CSV file, processes it, and inserts it into the Django database. 
+It includes functions to read and process the CSV file, insert the data into the database, and verify the insertion.
+"""
+
 import os
 import sys
 import django
@@ -24,10 +29,10 @@ def read_and_process_file(file_path):
         return state_data
     except Exception as e:
         print(f"Error reading file {file_path}: {e}")
-        return pd.DataFrame()  # Return an empty DataFrame in case of error
+        return pd.DataFrame()  
 
 def insert_data_to_db(data):
-    """Insert the processed data into the PostgreSQL database."""
+    """Insert the processed data into the Django database."""
     population_data_objects = [
         PopulationData(
             name=row['Description'],

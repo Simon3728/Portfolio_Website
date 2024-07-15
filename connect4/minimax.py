@@ -1,3 +1,11 @@
+"""
+Minimax algorithm implementation for Connect4 game.
+
+This file contains the MinimaxPlayer class, which uses the minimax algorithm with alpha-beta pruning
+to calculate the best move in a Connect4 game. The class also includes various helper methods
+for evaluating the board and making decisions.
+"""
+
 import random
 from django.conf import settings
 import os
@@ -8,11 +16,17 @@ COLUMNS = 7
 
 class MinimaxPlayer:
     def __init__(self, name, piece, depth=5):
+        """
+        Initialize the MinimaxPlayer.
+        """
         self.name = name
         self.piece = piece
         self.depth = depth
 
     def minimax(self, board, depth, alpha, beta, maximizingPlayer):
+        """
+        Perform the minimax algorithm with alpha-beta pruning.
+        """
         if depth == 0 or board.check_winner(1) or board.check_winner(2):
             return self.evaluate_board(board.board, depth)
 
@@ -23,7 +37,7 @@ class MinimaxPlayer:
             for col in valid_moves:
                 row, _ = board.drop_piece(col, self.piece)
                 eval = self.minimax(board, depth - 1, alpha, beta, False)
-                board.board[row][col] = 0  
+                board.board[row][col] = 0  # Undo the move
                 max_eval = max(max_eval, eval)
                 alpha = max(alpha, eval)
                 if beta <= alpha:
@@ -35,7 +49,7 @@ class MinimaxPlayer:
             for col in valid_moves:
                 row, _ = board.drop_piece(col, opponent_piece)
                 eval = self.minimax(board, depth - 1, alpha, beta, True)
-                board.board[row][col] = 0  
+                board.board[row][col] = 0  # Undo the move
                 min_eval = min(min_eval, eval)
                 beta = min(beta, eval)
                 if beta <= alpha:
@@ -43,14 +57,17 @@ class MinimaxPlayer:
             return min_eval
 
     def get_move(self, board, sequence):
+        """
+        Get the best move for the current player using the minimax algorithm.
+        """
         turn = self.get_move_count(board.board)
         if turn == 0:
-            return 3
+            return 3  # First move in the center column
         elif turn <= 5:
             last_digit = self.binary_search_ignore_last_digit(f'moves_{turn}.txt', sequence)
             if last_digit > 0 and last_digit < 8:
-                time.sleep(0.7)
-                return last_digit - 1            
+                time.sleep(0.7)  # Simulate thinking time
+                return last_digit - 1
 
         best_moves = []
         best_value = -float('inf')
@@ -60,7 +77,7 @@ class MinimaxPlayer:
             if board.is_valid_move(col):
                 row, _ = board.drop_piece(col, self.piece)
                 value = self.minimax(board, self.depth - 1, alpha, beta, False)
-                board.board[row][col] = 0
+                board.board[row][col] = 0  # Undo the move
                 if value > best_value:
                     best_value = value
                     best_moves = [col]
@@ -70,6 +87,9 @@ class MinimaxPlayer:
         return random.choice(best_moves)
 
     def evaluate_board(self, board, depth):
+        """
+        Evaluate the board state.
+        """
         def score_position(board, piece):
             score = 0
 
@@ -122,6 +142,9 @@ class MinimaxPlayer:
         return score
 
     def evaluate_window(self, window, piece):
+        """
+        Evaluate a window of four cells.
+        """
         score = 0
         opponent_piece = 2 if piece == 1 else 1
 
@@ -138,6 +161,9 @@ class MinimaxPlayer:
         return score
 
     def binary_search_ignore_last_digit(self, filename, target):
+        """
+        Perform a binary search on a file to find a number ignoring its last digit.
+        """
         file_path = os.path.join(settings.BASE_DIR, 'connect4', 'Possible_Moves', filename)
         with open(file_path, 'r') as file:
             lines = [line.strip() for line in file.readlines()]
@@ -163,6 +189,9 @@ class MinimaxPlayer:
             return -1
 
     def get_move_count(self, board):
+        """
+        Get the count of moves made so far.
+        """
         count = 0
         for row in board:
             for cell in row:

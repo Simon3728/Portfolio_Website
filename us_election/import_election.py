@@ -1,9 +1,17 @@
+"""
+Script to process and import election data into the Django database.
+
+This script reads election data from text files, processes the data, and inserts it into the database 
+using the ElectionResult model from the us_election application.
+"""
+
 import os
 import django
 import sys
 import pandas as pd
 import re
 
+# Set up Django environment
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(BASE_DIR)
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'myportfolio.settings')
@@ -11,7 +19,7 @@ django.setup()
 
 from us_election.models import ElectionResult
 
-# Dictanary for mapping to state names
+# Dictionary for mapping state abbreviations to state names
 state_names = {
     'AL': 'Alabama', 'AK': 'Alaska', 'AZ': 'Arizona', 'AR': 'Arkansas', 'CA': 'California',
     'CO': 'Colorado', 'CT': 'Connecticut', 'DC': 'District of Columbia', 'DE': 'Delaware',
@@ -26,6 +34,9 @@ state_names = {
 }
 
 def main():
+    """
+    Main function to process election data files and insert the data into the database.
+    """
     file_paths = [
         'president_2000.txt', 'president_2004.txt', 
         'president_2008.txt', 'president_2012.txt', 
@@ -42,10 +53,10 @@ def main():
     # Insert all data into the database using Django models
     insert_data_to_db(all_data)
 
-
 def read_and_process_file(file_path):
-    """Read and process the election data file."""
-
+    """
+    Read and process an election data file.
+    """
     # Extract year from filename
     year_match = re.search(r'president_(\d{4})\.txt', file_path)
     year = int(year_match.group(1)) if year_match else None
@@ -87,8 +98,9 @@ def read_and_process_file(file_path):
     return df[['State', 'Year', 'Republican', 'Democratic', 'Others', 'Total']]
 
 def insert_data_to_db(data):
-    """Insert the processed data into the database using Django ORM."""
-
+    """
+    Insert the processed data into the database using Django ORM.
+    """
     for _, row in data.iterrows():
         ElectionResult.objects.create(
             state=row['State'],

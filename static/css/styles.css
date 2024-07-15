@@ -1,12 +1,12 @@
 @charset "UTF-8";
 
- html, body {
+html, body {
   background-color: #1f1f1f !important;
   color: #fff;
   font-family: "Montserrat", sans-serif;
 }
 
-/* COllapsable content */
+/* Collapsable content */
 .collapsible-heading {
   cursor: pointer;
   display: flex;
@@ -16,7 +16,7 @@
 
 .collapsible-heading .arrow {
   font-size: 1.5rem;
-  transition: transform 0.35s ease, content 0.35s ease;
+  transition: transform 0.35s ease, content 0.35s ease; /* Smooth transition for transform and content change */
   display: inline-flex;
   align-items: center;
   color: var(--bs-success);
@@ -35,7 +35,7 @@
   width: 100%;
 }
 
-/* Different font wheights */
+/* Different font weights */
 .font-weight-700 {
   font-weight: 700 !important;
 }
@@ -53,8 +53,8 @@
 }
 
 .btn-success:hover {
-  background-color: #1d8d51 !important; /* Slightly darker shade */
-  border-color: #1d8d51 !important; /* Slightly darker shade */
+  background-color: #1d8d51 !important; 
+  border-color: #1d8d51 !important; 
 }
 
 .text-success {
@@ -62,17 +62,17 @@
 }
 
 .social-icons a:hover .bi {
-  color: #52D18F; /* Replace with your desired color */
+  color: #52D18F; 
 }
 
 .custom-bg {
-  background-color: #52D18F !important; /* Replace with your desired color */
+  background-color: #52D18F !important; 
 }
 
-/* Profil card on main page */
+/* Profile card on main page */
 .profil-card {
   background-color: transparent !important;
-  border-radius: 30px;
+  border-radius: 30px; /* Rounded corners */
   overflow: hidden;
 }
 
@@ -85,10 +85,10 @@
 }
 
 .fixed-box {
-  position: fixed;
+  position: fixed; /* Fixed position on the screen */
   top: 50%;
   left: 5%;
-  transform: translateY(-50%);
+  transform: translateY(-50%); /* Center vertically */
   height: 70%;
   max-width: 25%;
   background-color: #1f1f1f;
@@ -101,9 +101,9 @@
 
 .fixed-box img {
   height: auto; 
-  border-radius: 20px;
+  border-radius: 20px; /* Rounded corners */
   margin-bottom: 20px;
-  object-fit: contain;
+  object-fit: contain; /* Ensure the image fits within its container */
 }
 
 .social-icons a {
@@ -169,8 +169,8 @@
   margin-top: 5px;
   right: 0;
   background: white;
-  transition: width 0.4s ease;
-  -webkit-transition: width 0.4s ease;
+  transition: width 0.4s ease; /* Smooth width transition on hover */
+  -webkit-transition: width 0.4s ease; /* For Safari and older browsers */
 }
 
 .nav-link:hover::after {
@@ -186,7 +186,7 @@
 }
 
 .navbar-toggler-icon {
-  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba%28255, 255, 255, 1%29' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba%28255, 255, 255, 1%29' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E"); /* Custom icon for the navbar toggler */
 }
 
 /* Contact card */
@@ -210,7 +210,7 @@
 
 .form-control:focus {
   border-color: #52D18F; 
-  box-shadow: 0 0 0 0.25rem rgba(82, 209, 143, 0.411); 
+  box-shadow: 0 0 0 0.25rem rgba(82, 209, 143, 0.411); /* Subtle shadow effect */
   color: #fff; 
 }
 
@@ -239,14 +239,14 @@
 }
 
 .custom-card .card {
-  transition: transform 0.3s ease, background-color 0.3s ease !important;
+  transition: transform 0.3s ease, background-color 0.3s ease !important; /* Smooth transition for transform and background color */
   background-color: transparent !important; /* Make the background transparent */
   border: 1px solid white !important; /* Set border to white */
   color: inherit; 
 }
 
 .custom-card .card:hover {
-  transform: scale(1.05); 
+  transform: scale(1.05); /* Slightly enlarge the card on hover */
   background-color: #52D18F !important; /* Change to desired background color on hover */
   color: white;
 }
@@ -255,13 +255,13 @@
 .responsive-img {
   max-width: 60%;
   width: auto;
-  transition: max-width 0.3s ease-in-out;
+  transition: max-width 0.3s ease-in-out; /* Smooth transition for resizing */
 }
 
 .scrollable-container {
   width: 70%;
   max-height: 500px; 
-  overflow-y: auto; 
+  overflow-y: auto; /* Enable vertical scrolling */
 }
 .full-size-image {
   width: 100%;
@@ -271,7 +271,7 @@
 /* Connect 4 Game */
 
 #connect4-board {
-  border-collapse: collapse;
+  border-collapse: collapse; /* Remove spaces between table cells */
   width: 100%;
   max-width: 600px; 
   height: auto;
@@ -280,8 +280,8 @@
 }
 
 #connect4-board td {
-  width: 14.28%; 
-  padding-top: calc(100% / 8); 
+  width: 14.28%; /* Ensure each cell is 1/7th of the table's width */
+  padding-top: calc(100% / 8); /* Make cells square by using aspect ratio trick */
   position: relative;
   border: 1px solid #ffffff;
   cursor: pointer;
@@ -291,21 +291,21 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%); 
+  transform: translate(-50%, -50%); /* Center the circle inside the cell */
   height: 70%; 
   width: 70%;
-  border-radius: 50%;
+  border-radius: 50%; /* Make the inner element a circle */
   border: 5px solid navy;
 }
 
 .empty {
-  background-color: rgb(255, 255, 255) !important;
+  background-color: rgb(255, 255, 255) !important; /* White background for empty cells */
 }
 
 .player1 {
-  background-color: red !important;
+  background-color: red !important; /* Red background for Player 1 */
 }
 
 .player2 {
-  background-color: yellow !important;
+  background-color: yellow !important; /* Yellow background for Player 2 */
 }

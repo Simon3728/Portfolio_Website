@@ -1,6 +1,15 @@
+"""
+Models for Population Data and Election Results.
+
+This file defines the database models for storing population data and election results.
+"""
+
 from django.db import models
 
 class PopulationData(models.Model):
+    """
+    Model to store population data.
+    """
     name = models.CharField(max_length=255)
     year = models.IntegerField()
     total_population = models.IntegerField()
@@ -17,9 +26,15 @@ class PopulationData(models.Model):
     female_population = models.FloatField()
 
     def __str__(self):
+        """
+        String representation of the PopulationData object.
+        """
         return f"{self.name} - {self.year}"
 
 class ElectionResult(models.Model):
+    """
+    Model to store election results.
+    """
     state = models.CharField(max_length=255)
     year = models.IntegerField()
     republican = models.FloatField()
@@ -28,4 +43,7 @@ class ElectionResult(models.Model):
     total = models.FloatField()
 
     def __str__(self):
+        """
+        String representation of the ElectionResult object.
+        """
         return f"{self.state} - {self.year}"

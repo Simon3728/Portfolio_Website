@@ -1,8 +1,16 @@
+"""
+Script to verify and validate population data from the Django database.
+
+This script checks for data integrity by verifying the sum of population age groups,
+gender population consistency, and the presence of NULL or NaN values.
+"""
+
 import os
 import django
 import sys
 import math
 
+# Set up Django environment
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(BASE_DIR)
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'myportfolio.settings')
@@ -11,14 +19,16 @@ django.setup()
 from us_election.models import PopulationData
 
 def main():
-    tolerance = 0.005  # 0.5%
+    tolerance = 0.005  # 0.5% tolerance for numerical comparisons
     rows = fetch_population_data()
     critical_entries = validate_population_data(rows, tolerance)
     null_entries = check_for_null_values(rows)
 
+    # Print critical entries found during validation
     for entry in critical_entries:
         print(f"Critical Entry - ID: {entry[0]}, Name: {entry[1]}, Year: {entry[2]}, Issue: {entry[3]}")
 
+    # Print entries with NULL or NaN values
     for entry in null_entries:
         print(f"Null Value Entry - ID: {entry[0]}, Name: {entry[1]}, Year: {entry[2]}, Issue: {entry[3]}")
 
