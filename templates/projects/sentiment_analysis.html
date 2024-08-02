@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Bitcoin Sentiment Analysis - Personal Portfolio{% endblock %}
+
+{% block content %}
+<section class="py-5">
+    <div class="container">
+        <h1 class="display-5 fw-bolder text-center mb-5">Bitcoin Sentiment Analysis</h1>
+        <p class="mt-5">
+            In this ongoing project, I scrape Tweets from X about Bitcoin to explore various methods of sentiment analysis. 
+            My goal is to understand how public sentiment influences Bitcoin's stock price. Currently, I am testing different sentiment analysis techniques.
+        </p>
+        <h2 class="text-success collapsible-heading" data-bs-toggle="collapse" href="#scraping" role="button" aria-expanded="true" aria-controls="minimax">
+            Scraping Tweets<span class="arrow bi text-success"></span>
+        </h2>
+        <div class="collapse show" id="scraping">
+            <p>
+                Scraping tweets is legal but not favored by companies. However, since I'm using this data for personal research and not for profit, 
+                I believe it's acceptable. X has made it increasingly difficult to scrape data, especially in the past year, causing most available 
+                libraries to become ineffective.
+            </p>
+            <p>
+                To overcome this challenge, I developed my own approach. It involves using multiple accounts to log into X and extract new tweets from the HTML 
+                of the latest search results for "Bitcoin". After a period, the system switches to another account to prevent timeouts and bans. 
+                I store only the tweet text and timestamp in a database.
+            </p>
+            <p>
+                It's crucial to filter out spam posts, such as those promoting products or groups. Therefore, I exclude tweets containing links or 
+                obvious advertisements. Additionally, I only include tweets that explicitly mention "Bitcoin" to ensure relevance.
+            </p>
+            <p>
+                Even after filtering, I gather between 15-40 tweets per minute, depending on the time of day. This necessitates fast and computationally 
+                efficient sentiment analysis due to my computer's limited processing power. Given my current scraping approach, I cannot run it on a server.
+            </p>
+            <p>
+                Soon, I plan to try a different data collection method that works on a server and is more reliable. This will hopefully allow me to run the 
+                process 24/7 without any issues.
+            </p>
+        </div>
+        <div class="separator my-4"></div>
+        <h2 class="text-success collapsible-heading" data-bs-toggle="collapse" href="#sentiment" role="button" aria-expanded="true" aria-controls="minimax">
+            Sentiment Analysis<span class="arrow bi text-success"></span>
+        </h2>
+        <div class="collapse show" id="sentiment">
+            <p>
+                I started with thes approach https://huggingface.co/blog/sentiment-analysis-twitter
+            </p>
+            <p>
+                I try Llame 3.1 on my local computer
+            </p>
+            <p>
+                I will try emotion detection analysis
+            </p>
+        </div>
+        <div class="separator my-4"></div>
+        <h2 class="text-success collapsible-heading collapsed" data-bs-toggle="collapse" href="#bitcoin" role="button" aria-expanded="false" aria-controls="minimax">
+            Twitter Sentiment influence on Bitcoin price <span class="arrow bi text-success"></span>
+        </h2>
+        <div class="collapse" id="bitcoin">
+            <p>
+                Soon to come...
+            </p>
+        </div>
+    </div>
+</section>
+{% endblock %}

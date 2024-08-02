@@ -7,6 +7,7 @@ urlpatterns = [
     path('', include('portfolio.urls')),
     path('', include('us_election.urls')),
     path('', include('connect4.urls')),
+    path('', include('tweets.urls')),
 ]
 
 
