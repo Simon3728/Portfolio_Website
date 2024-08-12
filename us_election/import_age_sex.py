@@ -16,7 +16,7 @@ django.setup()
 from us_election.models import PopulationData
 
 def main():
-    file_path = os.path.join(BASE_DIR, 'us_election', 'Data_Files', 'age_sex_data.csv')
+    file_path = os.path.join(os.path.dirname(__file__), 'Data_Files', 'age_sex_data.csv')
     data = read_and_process_file(file_path)
     if not data.empty:
         insert_data_to_db(data)
