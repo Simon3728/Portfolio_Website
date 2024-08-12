@@ -8,50 +8,37 @@
     <div class="container">
         <h1 class="display-5 fw-bolder text-center mb-5">Bitcoin Sentiment Analysis</h1>
         <p class="mt-5">
-            In this ongoing project, I scrape Tweets from X about Bitcoin to explore various methods of sentiment analysis. 
+            In this ongoing project, I use Tweets from X about Bitcoin to explore various methods of sentiment analysis. 
             My goal is to understand how public sentiment influences Bitcoin's stock price. Currently, I am testing different sentiment analysis techniques.
         </p>
-        <h2 class="text-success collapsible-heading" data-bs-toggle="collapse" href="#scraping" role="button" aria-expanded="true" aria-controls="minimax">
-            Scraping Tweets<span class="arrow bi text-success"></span>
-        </h2>
-        <div class="collapse show" id="scraping">
-            <p>
-                Scraping tweets is legal but not favored by companies. However, since I'm using this data for personal research and not for profit, 
-                I believe it's acceptable. X has made it increasingly difficult to scrape data, especially in the past year, causing most available 
-                libraries to become ineffective.
-            </p>
-            <p>
-                To overcome this challenge, I developed my own approach. It involves using multiple accounts to log into X and extract new tweets from the HTML 
-                of the latest search results for "Bitcoin". After a period, the system switches to another account to prevent timeouts and bans. 
-                I store only the tweet text and timestamp in a database.
-            </p>
-            <p>
-                It's crucial to filter out spam posts, such as those promoting products or groups. Therefore, I exclude tweets containing links or 
-                obvious advertisements. Additionally, I only include tweets that explicitly mention "Bitcoin" to ensure relevance.
-            </p>
-            <p>
-                Even after filtering, I gather between 15-40 tweets per minute, depending on the time of day. This necessitates fast and computationally 
-                efficient sentiment analysis due to my computer's limited processing power. Given my current scraping approach, I cannot run it on a server.
-            </p>
-            <p>
-                Soon, I plan to try a different data collection method that works on a server and is more reliable. This will hopefully allow me to run the 
-                process 24/7 without any issues.
-            </p>
-        </div>
         <div class="separator my-4"></div>
         <h2 class="text-success collapsible-heading" data-bs-toggle="collapse" href="#sentiment" role="button" aria-expanded="true" aria-controls="minimax">
             Sentiment Analysis<span class="arrow bi text-success"></span>
         </h2>
         <div class="collapse show" id="sentiment">
             <p>
-                I started with thes approach https://huggingface.co/blog/sentiment-analysis-twitter
+                For sentiment analysis, I want to compare four approaches and test their effectiveness for my project:
             </p>
-            <p>
-                I try Llame 3.1 on my local computer
-            </p>
-            <p>
-                I will try emotion detection analysis
-            </p>
+            <ol>
+                <li>
+                    The first one is the <a href="https://huggingface.co/cardiffnlp/twitter-roberta-base-sentiment-latest" class="text-reset" target="_blank">Twitter-roBERTa-base Sentiment Analysis Algorithm from Hugging Face</a>. 
+                    This algorithm analyzes tweets by breaking them down into smaller parts, understanding the context of each word using a technique called transformers, 
+                    and then predicting whether the sentiment is positive, neutral, or negative. It’s fast and should be quite accurate, thanks to its training on 124 million tweets.
+                </li>
+                <li>
+                    Llama 3.1 8B is the latest text-based AI from Meta, and since it’s open source, I can run it locally on my computer. It also allows for a more comprehensive analysis 
+                    of the tweets, such as identifying the actual emotions expressed and understanding how relevant tweets are to Bitcoin's performance.
+                </li>
+                <li>
+                    To practice implementing my own machine learning algorithms, I plan to use Support Vector Machines (SVM). SVM is a supervised learning algorithm 
+                    that classifies text in sentiment analysis by finding the optimal boundary, or hyperplane, that separates different sentiment classes 
+                    (such as positive and negative) in a high-dimensional space.
+                </li>
+                <li>
+                    My final approach will be to use a Random Forest algorithm. In sentiment analysis, Random Forests work by creating many decision trees, each using 
+                    different random parts of the data. The model then combines the predictions from all the trees to decide if the text is positive, negative, or neutral.
+                </li>
+            </ol>
         </div>
         <div class="separator my-4"></div>
         <h2 class="text-success collapsible-heading collapsed" data-bs-toggle="collapse" href="#bitcoin" role="button" aria-expanded="false" aria-controls="minimax">
