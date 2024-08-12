@@ -17,6 +17,7 @@ from us_election.models import PopulationData
 
 def main():
     file_path = '/app/us_election/Data_Files/age_sex_data.csv'
+    print(file_path)
     data = read_and_process_file(file_path)
     if not data.empty:
         insert_data_to_db(data)
