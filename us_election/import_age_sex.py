@@ -7,6 +7,9 @@ import os
 import sys
 import django
 import pandas as pd
+import logging
+
+logging.basicConfig(level=logging.INFO)
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(BASE_DIR)
@@ -17,7 +20,7 @@ from us_election.models import PopulationData
 
 def main():
     file_path = '/app/us_election/Data_Files/age_sex_data.csv'
-    print(f"Constructed file path: {file_path}", flush=True)
+    logging.info(file_path)
     data = read_and_process_file(file_path)
     if not data.empty:
         insert_data_to_db(data)
