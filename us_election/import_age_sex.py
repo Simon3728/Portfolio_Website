@@ -9,7 +9,6 @@ import django
 import pandas as pd
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-print(BASE_DIR)
 sys.path.append(BASE_DIR)
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'myportfolio.settings')
 django.setup()
@@ -18,7 +17,7 @@ from us_election.models import PopulationData
 
 def main():
     file_path = '/app/us_election/Data_Files/age_sex_data.csv'
-    print(file_path)
+    print(f"Constructed file path: {file_path}", flush=True)
     data = read_and_process_file(file_path)
     if not data.empty:
         insert_data_to_db(data)
