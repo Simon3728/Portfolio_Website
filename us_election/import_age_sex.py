@@ -9,13 +9,6 @@ import django
 import pandas as pd
 import logging
 
-# Configure logging
-logging.basicConfig(
-    level=logging.INFO,  # Set the logging level
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-)
-
-logger = logging.getLogger(__name__)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(BASE_DIR)
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'myportfolio.settings')
@@ -24,8 +17,7 @@ django.setup()
 from us_election.models import PopulationData
 
 def main():
-    file_path = '/app/us_election/Data_Files/age_sex_data.csv'
-    logging.info(file_path)
+    file_path = os.path.join(BASE_DIR, 'us_election', 'Data_Files', 'age_sex_data.csv')
     data = read_and_process_file(file_path)
     if not data.empty:
         insert_data_to_db(data)
