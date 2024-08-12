@@ -20,6 +20,7 @@ from us_election.models import PopulationData
 
 def main():
     tolerance = 0.005  # 0.5% tolerance for numerical comparisons
+    remove_duplicate_entries()
     rows = fetch_population_data()
     critical_entries = validate_population_data(rows, tolerance)
     null_entries = check_for_null_values(rows)
@@ -73,6 +74,21 @@ def validate_population_data(rows, tolerance):
             critical_entries.append((id, name, year, f'Gender population mismatch: male_population={male_population}, female_population={female_population}, total_population={total_population}'))
 
     return critical_entries
+
+def remove_duplicate_entries():
+    """
+    Identify and remove duplicate entries in the PopulationData table based on name and year.
+    Keeps only the first entry found and deletes others.
+    """
+    duplicates = PopulationData.objects.values('name', 'year').annotate(count_id=django.db.models.Count('id')).filter(count_id__gt=1)
+    
+    for duplicate in duplicates:
+        # Fetch all entries with the same name and year
+        duplicate_entries = PopulationData.objects.filter(name=duplicate['name'], year=duplicate['year'])
+        # Keep the first entry and delete the rest
+        for entry in duplicate_entries[1:]:
+            entry.delete()
+        print(f"Removed {len(duplicate_entries) - 1} duplicate entries for: {duplicate['name']} ({duplicate['year']})")
 
 def check_for_null_values(rows):
     """
