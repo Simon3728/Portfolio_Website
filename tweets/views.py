@@ -10,4 +10,4 @@ def tweets(request):
     """
     Render the tweets page.
     """
-    return render(request, 'projects\sentiment_analysis.html')
+    return render(request, 'projects/sentiment_analysis.html')
