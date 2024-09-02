@@ -17,4 +17,5 @@ urlpatterns = [
     path('projects/', views.projects, name='projects'),
     path('projects/gda_calculator/', views.gda_calculator, name='gda_calculator'),
     path('projects/sspp_solver/', views.sspp_solver, name='sspp_solver'),
+    path('projects/business_data/', views.business_data, name='business_data'),
 ]

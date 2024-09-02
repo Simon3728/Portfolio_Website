@@ -49,6 +49,12 @@ def sspp_solver(request):
     """
     return render(request, 'projects/sspp_solver.html')
 
+def business_data(request):
+    """
+    Render the SSPP solver project page.
+    """
+    return render(request, 'projects/business_data.html')
+
 def contact(request):
     """
     Handle contact form submission.
