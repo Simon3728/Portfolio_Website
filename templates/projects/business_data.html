@@ -14,23 +14,60 @@
             customer demographics, and other valuable information from the past year.
         </p>
         <p>
+            <strong>Please note:</strong> The report may take a little time to load due to the large number of data points being processed. 
+            While there are several ways to optimize loading times, I chose not to implement these optimizations in order to display a 
+            wide variety of charts with detailed information and to keep the dashboard fully interactive for this website.
+        </p>
+        <p>
             Below is the interactive report I created.
         </p>
-        <iframe width="100%" height="600" src="https://lookerstudio.google.com/embed/reporting/d20c7a6b-a685-4fc1-8d03-de0f06317301/page/bVEAE" frameborder="0" style="border:0" allowfullscreen sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"></iframe>
+        <iframe width="100%" height="800" src="https://lookerstudio.google.com/embed/reporting/d20c7a6b-a685-4fc1-8d03-de0f06317301/page/bVEAE" frameborder="0" style="border:0" allowfullscreen sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"></iframe>
+        
+        <div class="separator my-4"></div>
+        <h2 class="text-success collapsible-heading collapsed" data-bs-toggle="collapse" href="#dataset" role="button" aria-expanded="false" aria-controls="dashboard">
+            Dataset Overview <span class="arrow bi text-success"></span>
+        </h2>
+        <div class="collapse" id="dataset">
+            <p>
+                This dataset provides a detailed analysis of customer purchases over one year on an American E-commerce platform. 
+                Each entry represents a single order, capturing key information such as the order date, customer ID, sales amount, profit, and more. 
+                In total, the dataset contains 51,290 entries.
+            </p>
+            <ul>
+                <li><strong>Order_Date:</strong> The date the product was ordered.</li>
+                <li><strong>Aging:</strong> The time from the day the product is ordered to the day it is delivered.</li>
+                <li><strong>Customer_id:</strong> Unique ID created for each customer.</li>
+                <li><strong>Gender:</strong> Gender of the customer.</li>
+                <li><strong>Device_Type:</strong> The device the customer uses to complete the transaction (Web/Mobile).</li>
+                <li><strong>Customer_Login_Type:</strong> The type the customer logged in as, such as Member, Guest, etc.</li>
+                <li><strong>Product_Category:</strong> Category of the product.</li>
+                <li><strong>Product:</strong> Specific product.</li>
+                <li><strong>Sales:</strong> Total sales amount.</li>
+                <li><strong>Quantity:</strong> Unit amount of the product.</li>
+                <li><strong>Discount:</strong> Percent discount rate.</li>
+                <li><strong>Profit:</strong> Profit from the sale.</li>
+                <li><strong>Shipping_cost:</strong> Cost of shipping the product.</li>
+                <li><strong>Order_Priority:</strong> Priority of the order, such as critical, high, etc.</li>
+                <li><strong>Payment_method:</strong> Method of payment used.</li>
+            </ul>
+        </div>
+        <div class="separator my-4"></div>
+        <h2 class="text-success collapsible-heading collapsed" data-bs-toggle="collapse" href="#dashboard" role="button" aria-expanded="false" aria-controls="dashboard">
+            Dashboard <span class="arrow bi text-success"></span>
+        </h2>
+        <div class="collapse" id="dashboard">
+            <p>
+                Here are plots comparing the number of nodes checked by Dijkstra and A* for graphs with varying connectivity. 
+                I chose all cities in the US with a population over 500,000 (85 cities) and varied the desired degree to create 
+                three different graphs. In each graph, I selected 200 random city pairs and compared the number of nodes checked 
+                by Dijkstra and A* to find the shortest path.
+            </p>
 
-        <h2 class="mt-3">Graph Creation</h2>
-        <p>
-            The data source for city information is <a href="https://simplemaps.com/data/us-cities" target="_blank" class="text-reset">Simple Maps</a>. 
-            This data includes population and coordinates, which are necessary for calculating the distances between cities. 
-            The coordinates allow us to use the Haversine distance formula, which determines the shortest distance between two points 
-            on the Earth's surface, taking into account the Earth's curvature. The Haversine distance is used for both of the solvers.
-        </p>
-        <p>
-            From the city data, a Minimum Spanning Tree (MST) is created, which ensures that there is a path connecting all nodes. 
-            To add complexity to the graph, additional connections are made. You can select a desired degree (the number of connections a node has), 
-            and new connections to the nearest unconnected nodes will be created until the desired degree is achieved. 
-            This approach allows for comparing the solvers under different graph complexities. The graph is represented through an adjacency list for efficient navigation.
-        </p>
+            <p>
+                These plots show that A* significantly outperforms Dijkstra, especially in denser graphs. The heuristic in A* reduces the search space, 
+                making it more efficient.
+            </p>
+        </div>
     </div>
 </section>
 {% endblock %}
